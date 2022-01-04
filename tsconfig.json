@@ -1,10 +1,35 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@types": [
+        "types/index.d.ts"
+      ]
+    },
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -15,14 +40,12 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"],
-  "paths": {
-    "@utils/*": ["./utils/*.ts"],
-    "@components/*": ["./components/*.ts"], // 쓸수 있는 경로들 입니다
-    "@pages/*": ["./pages/*.ts"],
-    "@styles/*": ["./styles/*.ts"],
-    "@hooks/*": ["./hooks/*.ts"],
-    "@types": ["./types/index.d.ts"],
-  }
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
