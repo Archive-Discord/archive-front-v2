@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
 
-mongoose.connect("mongodb://localhost/archive")
+mongoose.connect(process.env.MONGODB_URL)
 
 export const db = mongoose.connection
 
