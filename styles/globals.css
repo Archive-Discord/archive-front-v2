@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@800&family=Noto+Sans+KR&family=Open+Sans:wdth,wght@86,800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,4 +18,8 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.logo {
+  font-family: 'Dosis', sans-serif;
 }
