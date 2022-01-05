@@ -1,13 +1,18 @@
 import type { NextPage } from 'next'
+import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { UserObject } from '@types'
+import { User } from '@types'
 import { NavBarList } from '@utils/Constants'
+import { userAvaterLink } from '@utils/Discord'
 import Link from 'next/link'
+import Dropdown from '@components/UserDropDown'
+import { useRouter } from 'next/router'
+import { redirectTo } from '@utils/Tools'
 
 const NavBar: NextPage = () => {
-  const [user, setUser] = useState<UserObject>()
+  const [user, setUser] = useState<User>()
   const [navBarOpen, setNavBarOpen] = useState<boolean>()
-
+  const router = useRouter()
   const OnclickNavBarOpen = () => {
     if (navBarOpen) {
       setNavBarOpen(false)
@@ -15,7 +20,27 @@ const NavBar: NextPage = () => {
       setNavBarOpen(true)
     }
   }
+
+  const ClickLogin = () => {
+    localStorage.redirectTo = window.location.href
+    redirectTo(router, '/api/v1/auth/login')
+  }
   useEffect(() => {
+		if(localStorage.userData) {
+			return setUser(JSON.parse(localStorage.userData) || null)
+		}
+		axios.get('/api/v1/users/@me').then(data => {
+			if(data.status !== 200) return setUser(null)
+			return setUser(JSON.parse(localStorage.userData = JSON.stringify({
+				_id: data.data.data.id,
+				username: data.data.data.username,
+				discriminator: data.data.data.discriminator,
+        avatar: data.data.data.avatar
+			})))
+		}).catch((e) => (
+      setUser(null)
+    ))
+
   }, [])
 
   return (
@@ -36,7 +61,7 @@ const NavBar: NextPage = () => {
               "w-full block flex-grow lg:flex lg:items-center lg:w-auto" +
               (navBarOpen ? " flex" : " hidden")
             }>
-          <div className="w-full text-sm lg:flex lg:justify-between lg:flex-wrap">
+          <div className="w-full text-sm lg:flex lg:justify-between lg:flex-wrap lg:items-center">
             <div>
               {NavBarList.map(({name, href}) => (
                 <Link href={href} key={name}>
@@ -49,11 +74,14 @@ const NavBar: NextPage = () => {
             <div>
           {user ? (
                 <>
+                  <div className='mt-4 lg:mt-0 lg:ml-0 lb:mb-0 flex text text-gray-700 items-center font-semibold ml-2 mb-2 lg:mb-0'>
+                    <img className='w-8 h-8 rounded-full mr-1.5' src={userAvaterLink(user)}/>{user.username}<Dropdown/>
+                  </div>
                 </>
               ):(
                 <>
-                  <Link href='/login'>
-                    <a className="block mt-4 lg:inline-block lg:mt-0 rounded-lg px-3 py-2 text-gray-700 font-medium hover:text-sky-500 hover:underline hover:underline-offset-4">
+                  <Link href='/api/v1/auth/login'>
+                    <a onClick={()=> (ClickLogin())} className="block mt-4 lg:inline-block lg:mt-0 rounded-lg px-3 py-2 text-gray-700 font-medium hover:text-sky-500 hover:underline hover:underline-offset-4">
                       로그인
                     </a>
                   </Link>
@@ -68,5 +96,4 @@ const NavBar: NextPage = () => {
     </>
   )
 }
-
 export default NavBar
