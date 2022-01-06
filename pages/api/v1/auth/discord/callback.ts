@@ -28,8 +28,7 @@ export default Handler().get(async (req: NextApiRequest, res: NextApiResponse) =
       if(err) return res.status(401).json({ code: 401, message: "Unauthorized" });
     })
   } else {
-    await UserDB.findOneAndUpdate({_id: userData.id}, {$set: { expires_in: token.expires_in, refresh_token: token.refresh_token}})
-    await UserDB.findOneAndUpdate({_id: userData.id}, {$push: {access_token: { $each : [token.access_token]}}})
+    await UserDB.updateOne({_id: userData.id}, {$set: { expires_in: token.expires_in, refresh_token: token.refresh_token}, $push: {access_token: { $each : [token.access_token]}}})
   }
   if(!token.access_token) return res.status(401).json({ code: 401, message: "Unauthorized" });
   res.setHeader('Set-Cookie', serialize('auth', token.access_token, { path: '/'}))

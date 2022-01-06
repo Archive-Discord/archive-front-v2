@@ -37,7 +37,14 @@ export interface Bot {
   server: string
 }
 
-export interface DropDownProps {
-	icon: string
-	lists: Array
+export interface DiscordUser {
+	id: string
+	username: string
+	discriminator: string
+	avatar: string
+	bot: boolean
+	flags: number
+	banner: string
+	public_flags: number
+	accent_color: number
 }

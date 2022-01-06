@@ -1,11 +1,23 @@
-import { User } from '@types'
-import { EndPoints } from '@utils/Constants'
+import { EndPoints } from "@utils/Constants";
+import { DiscordUser } from "@types"
+import axios from "axios";
 
 /**
- * @param user 유저 오브젝트 값
- * @returns 유저 프로필 링크
+ * @param id 유저 ID
+ * @returns 요청 성공시 유저정보, 실패시 에러정보
  */
-export const userAvaterLink = (user: User) => {
-    if(!user.avatar) return `${EndPoints.Discord.CDN}/embed/avatars/${Number(user.discriminator) % 5}.png`
-    return `${EndPoints.Discord.CDN}/avatars/${user._id}/${user.avatar}`
+export async function getUserData(id){
+    try {
+        let UserFetch = await axios({
+            method: "GET",
+            url: `${EndPoints.Discord.API}/users/${id}`,
+            headers: {
+                "Authorization": "Bot " + process.env.BOT_TOKEN
+            }
+        })
+        let User: DiscordUser = UserFetch.data
+        return User
+    } catch(err) {
+        return err.response.data
+    }
 }
