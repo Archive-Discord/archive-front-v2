@@ -22,8 +22,10 @@ export interface Guild {
 }
 
 export interface Bot {
-	_id: string
-	owners: string[],
+  _id: Number // 미사용
+  id: string // 아카이브 전용 아이디
+  BotId: string // 봇 아이디
+  owners: string[],
   description: string,
   category: Category[],
   prefix: string,

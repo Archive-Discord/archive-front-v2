@@ -10,8 +10,7 @@ export async function getUserData(token: string, isPrivate = false): Promise<Use
   }
 }
 
-export async function getBotData(id: string): Promise<Bot|null> {
-  let bot: Bot = await BotDB.findOne({ _id: id})
-  
+export async function getBotData(BotId: string): Promise<Bot|null> {
+  let bot: Bot = await BotDB.findOne({id: BotId},{token: 0, _id: 0}) // types 확인 해주세요
   return bot
 }

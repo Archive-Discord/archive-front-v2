@@ -2,13 +2,12 @@ import { EndPoints } from "@utils/Constants";
 import { DiscordUser } from "@types"
 import axios from "axios";
 import { DiscordUserCache } from "@utils/Cache";
-import console from "console";
 
 /**
  * @param id 유저 ID
  * @returns 요청 성공시 유저정보, 실패시 에러정보
  */
-export async function getUserData(id){
+export async function getUserData(id: string){
     let cacheCheck = DiscordUserCache.has(id)
     if(cacheCheck) {
         return DiscordUserCache.get(id)
