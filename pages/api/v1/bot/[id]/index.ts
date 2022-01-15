@@ -6,7 +6,8 @@ import { getUserData as getDiscordUser } from "@utils/Discord";
 import { BotCache } from "@utils/Cache";
 
 export default Handler().get(async (req: NextApiRequest, res: NextApiResponse) => {
-  let { id } = req.query;
+  let id = req.query.id as string // string[] 제거 목적으로 사용
+  
   let cacheCheck = BotCache.has(id)
   if(cacheCheck) {
     return res.status(200).json({code:200, data: BotCache.get(id)}) 

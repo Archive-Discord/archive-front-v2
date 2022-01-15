@@ -1,7 +1,6 @@
+import RequestHandler from "@utils/RequestHandler"
 import { NextApiRequest, NextApiResponse } from "next"
 
-let login = async function(_req: NextApiRequest, res: NextApiResponse) {
+export default RequestHandler('loginLimiter').all((_req: NextApiRequest, res: NextApiResponse) => {
   res.redirect(process.env.OAUTH_URL)
-}
-
-export default login
+})
