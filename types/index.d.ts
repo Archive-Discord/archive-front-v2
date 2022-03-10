@@ -60,18 +60,18 @@ export interface DiscordUser {
 
 export interface ServerList {
 	id: string;
-	sortDescription: string;
+	sortDescription?: string;
 	description?: string;
 	icon?: string;
-	like: number;
+	like?: number;
 	name: string;
 	bot: boolean;
 	categories?: string[];
-	members: number;
-	flags: number;
+	members?: number;
+	flags?: number;
 	create_date?: Date;
 	published_date?: Date;
-	owners: User[];
+	owners?: User[];
 }
 
 export interface Server {
@@ -87,4 +87,13 @@ export interface Server {
 	owners: User[];
 }
 
-export type limitType = 'loginLimiter' | 'createLimiter'
+export interface DiscordUserGuild {
+	id: string;
+	name: string;
+	icon: string;
+	owner: boolean;
+	permissions: number;
+	permissions_new: number;
+	bot: boolean;
+	features: string[];
+}

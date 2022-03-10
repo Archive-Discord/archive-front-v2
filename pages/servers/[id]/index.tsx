@@ -8,7 +8,7 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import Link from 'next/link'
 import Markdown from '@components/MarkDown'
-import GoogleAds, { VerticalAdvertisement } from '@components/GoogleAds'
+import GoogleAds from '@components/GoogleAds'
 import Comments from '@components/Comments'
 
 interface ServerProps {
@@ -44,19 +44,26 @@ const Home: NextPage<ServerProps> = ({server}) => {
     <div className={styles.container}>
       <HeadInfo title={'아카이브 - ' + server.name} description={server.sortDescription} image={guildProfileLink(server)}/>
       <div className='flex lg:flex-row lg:justify-between lg:flex-nowarp flex-col items-center justify-center flex-warp mx-4'>
-        <div className='flex flex-row items-center'>
-            <img className='lg:w-40 w-24 rounded-3xl' src={guildProfileLink(server)}/>
-            <div className='flex flex-col'>
-                <span className='ml-6 text-3xl font-bold truncate'>{server.name}</span>
-                <span className='flex flex-row ml-6 text-lg font-semibold mt-2'>
+        <div className='flex lg:flex-row flex-col items-center'>
+            <img className='lg:w-40 w-36 rounded-3xl' src={guildProfileLink(server)}/>
+            <div className='flex flex-col lg:items-start items-center'>
+                {server.bot ? (null) : (<>
+                    <span className='lg:ml-6 text-xl font-bold truncate lg:mt-0 mt-2 text-red-400'><i className="fas fa-exclamation-triangle mr-2"/>정보 갱신불가</span>
+                </>)}
+                <span className='lg:ml-6 text-3xl font-bold truncate lg:mt-0 mt-1'>{server.name}</span>
+                <span className='flex flex-row lg:ml-6 text-lg font-semibold lg:mt-2 mx-auto'>
                     <span className='mr-1'><i className="fas fa-users mr-1"/>{formatNumber(server.members)}명</span>
                     <span className='mx-2'><i className="fas fa-calendar-alt mr-1"/>{DateFormet(server.create_date).fromNow(true)}전 생성</span>
                 </span>
             </div>
         </div>
         <div className='flex flex-row items-center text-xl lg:mt-0 mt-5'>
-            <button className='border bg-sky-500 px-5 rounded-xl text-white py-2 mx-1 hover:bg-sky-400 transform hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'>입장하기</button>
-            <button className='border px-5 rounded-xl py-2 mx-1 hover:bg-stone-200 hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'><i className="fas fa-caret-up mr-2"/>좋아요 ({formatNumber(server.like)})</button>
+            <Link href={`/servers/${server.id}/invite`}>
+                <a className='border bg-sky-500 px-5 rounded-xl text-white py-2 mx-1 hover:bg-sky-400 transform hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'>입장하기</a>
+            </Link>
+            <Link href={`/servers/${server.id}/like`}>
+                <a className='border px-5 rounded-xl py-2 mx-1 hover:bg-stone-200 hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'><i className="fas fa-caret-up mr-2"/>좋아요 ({formatNumber(server.like)})</a>
+            </Link>
         </div>
       </div>
       <div className="max-w-7xl my-2 mx-auto">

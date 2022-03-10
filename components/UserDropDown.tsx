@@ -35,14 +35,6 @@ function DropDown() {
         <Menu.Item>
               {({ active }) => (
                 <>
-                  <button onClick={()=>(onclickButton())}>
-                    <div className='flex items-center px-4 py-2'>
-                      <i className="fas fa-server mr-2"/>
-                      <a className={classNames(active ? 'bg-gray-100' : '', 'block text-gray-700 hover:text-sky-500 hover:underline hover:underline-offset-4')}>
-                        대시보드
-                      </a>
-                    </div>
-                  </button>
                     <button className='flex items-center px-4 py-2' onClick={()=>(onClickLogout())}>
                     <i className="fas fa-sign-out-alt mr-2"/>
                       <a className={classNames(active ? 'bg-gray-100' : '', 'block text-gray-700 hover:text-sky-500 hover:underline hover:underline-offset-4')}>
