@@ -1,12 +1,11 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { redirectTo } from '@utils/Tools'
+import { EndPoints } from '@utils/Constants'
 
 const Login = () => {
-	const router = useRouter()
 	useEffect(() => {
 		localStorage.redirectTo = window.location.href
-        redirectTo(router, '/api/v1/auth/login')
+        window.location.href = `${EndPoints.Archive.API}/auth/discord`
 	})
 	return <>
 		<div className="w-50 h-screen flex items-center justify-center flex-col">

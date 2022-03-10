@@ -1,5 +1,7 @@
 .container {
-  padding: 0 2rem;
+  padding: 0 3rem;
+  margin-top: 4rem;
+  font-family: nanumsquare;
 }
 
 .main {
@@ -113,4 +115,19 @@
     width: 100%;
     flex-direction: column;
   }
+}
+
+.lists {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 50vh;
+}
+
+.title {
+  display: flex;
+  font-family: nanumsquare;
+  flex-direction: column;
+  margin-bottom: 1em;
 }

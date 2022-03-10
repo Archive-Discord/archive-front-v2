@@ -2,8 +2,8 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {useRouter} from 'next/router'
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+  return classes.filter(Boolean).join(' ')
+}
 
 function DropDown() {
   const router = useRouter()

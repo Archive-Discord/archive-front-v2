@@ -2,17 +2,14 @@ import type { NextPage } from 'next'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { User } from '@types'
-import { NavBarList } from '@utils/Constants'
+import { EndPoints, NavBarList } from '@utils/Constants'
 import { userAvaterLink } from '@utils/Tools'
 import Link from 'next/link'
 import Dropdown from '@components/UserDropDown'
-import { useRouter } from 'next/router'
-import { redirectTo } from '@utils/Tools'
 
 const NavBar: NextPage = () => {
   const [user, setUser] = useState<User>()
   const [navBarOpen, setNavBarOpen] = useState<boolean>()
-  const router = useRouter()
   const OnclickNavBarOpen = () => {
     if (navBarOpen) {
       setNavBarOpen(false)
@@ -23,20 +20,15 @@ const NavBar: NextPage = () => {
 
   const ClickLogin = () => {
     localStorage.redirectTo = window.location.href
-    redirectTo(router, '/api/v1/auth/login')
+    window.location.href = `${EndPoints.Archive.API}/auth/discord`
   }
   useEffect(() => {
 		if(localStorage.userData) {
 			return setUser(JSON.parse(localStorage.userData) || null)
 		}
-		axios.get('/api/v1/users/@me').then(data => {
+		axios.get('/users/@me').then(data => {
 			if(data.status !== 200) return setUser(null)
-			return setUser(JSON.parse(localStorage.userData = JSON.stringify({
-				_id: data.data.data.id,
-				username: data.data.data.username,
-				discriminator: data.data.data.discriminator,
-        avatar: data.data.data.avatar
-			})))
+			return setUser(JSON.parse(localStorage.userData = JSON.stringify(data.data.data.user)))
 		}).catch((e) => (
       setUser(null)
     ))
@@ -45,11 +37,13 @@ const NavBar: NextPage = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-40 flex flex-wrap items-center px-5 py-2 backdrop-blur text-gray-100 border-b border-gray-900/10">
+      <nav className="fixed top-0 z-40 flex flex-wrap items-center px-5 py-2 backdrop-blur text-gray-100 border-b border-gray-900/10 w-full">
         <div className='container flex flex-wrap justify-between mx-auto px-4 items-center'>
           <div className="flex items-center flex-shrink-0 text-white mr-6">
           <Link href='/'>
-            <a className="logo rounded-lg px-3 py-2 text-gray-700 text-2xl font-semibold">ARCHIVE</a>
+            <a className='flex items-center'>
+            <img className="px-3 py-1 h-10" src='/logo_sm.png'/><span className='text-gray-700 text-xl font-semibold logo'>ARCHIVE</span>
+            </a>
           </Link>
         </div>
         <div className="block lg:hidden">
@@ -80,11 +74,9 @@ const NavBar: NextPage = () => {
                 </>
               ):(
                 <>
-                  <Link href='/api/v1/auth/login'>
-                    <a onClick={()=> (ClickLogin())} className="block mt-4 lg:inline-block lg:mt-0 rounded-lg px-3 py-2 text-gray-700 font-medium hover:text-sky-500 hover:underline hover:underline-offset-4">
-                      로그인
-                    </a>
-                  </Link>
+                  <a onClick={()=> (ClickLogin())} className="block mt-4 lg:inline-block lg:mt-0 rounded-lg px-3 py-2 text-gray-700 font-medium hover:text-sky-500 hover:underline hover:underline-offset-4">
+                    로그인
+                  </a>
                 </>
               )}
           </div>

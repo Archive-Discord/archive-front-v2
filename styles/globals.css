@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "nanumsquare";
+  src: url("https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css")
+    format("css");
+}
+
 html,
 body {
   padding: 0;

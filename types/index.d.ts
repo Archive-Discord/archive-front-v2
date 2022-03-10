@@ -1,40 +1,18 @@
 export type Category = "봇" | "관리" | "개발" | "게임" | "마인크래프트" | "배틀그라운드" | "오버워치"
+export type ApiRequestType = "servers" | "bots"
 
 export interface User {
-	_id: string
+	id: string
 	username: string
 	discriminator: string
 	avatar: string
 	bot: boolean
 	flags: number
 }
-
-export interface UserDB {
-	_id: string
-	access_token: string[]
-	refresh_token: string
-	expires_in: String
-}
-
-export interface SubmitDB {
-	_id: number
-	user: UserDB
-	bot?: Bot
-	server?: Guild
-}
-export interface BotCache {
-	bot: Bot
-	user: DiscordUser
-}
-
-export interface Secrets {
-	_id: string
-	token: string
-}
 export interface Guild {
-	_id: string
+	id: string
 	owners: string[]
-	sortdescriptor: string
+	sortDescription: string
 	description: string
 	score: number
 	invite?: string
@@ -44,22 +22,29 @@ export interface Guild {
 }
 
 export interface Bot {
-  _id: Number 
-  id: string // 아카이브 전용 아이디
-  BotId: string // 봇 아이디
+  id: string
   owners: string[],
   description: string,
   category: Category[],
   prefix: string,
   homepage?: string,
-  sortdescription: string,
+  sortDescription: string,
   invite: string,
   supportserver?: string,
   flags: number,
   like: number,
   token: string,
-  server: string
+  server: number
 }
+
+export interface Comment {
+	id:string;
+	server_id: string;
+	user_id: string;
+	comment: string;
+	user: DiscordUser
+	published_date: Date;
+  }
 
 export interface DiscordUser {
 	id: string
@@ -71,6 +56,35 @@ export interface DiscordUser {
 	banner: string
 	public_flags: number
 	accent_color: number
+}
+
+export interface ServerList {
+	id: string;
+	sortDescription: string;
+	description?: string;
+	icon?: string;
+	like: number;
+	name: string;
+	bot: boolean;
+	categories?: string[];
+	members: number;
+	flags: number;
+	create_date?: Date;
+	published_date?: Date;
+	owners: User[];
+}
+
+export interface Server {
+	id: string;
+	description: string;
+	sortDescription: string;
+	icon?: string;
+	like: number;
+	name: string;
+	bot: boolean;
+	members: number;
+	flags: number;
+	owners: User[];
 }
 
 export type limitType = 'loginLimiter' | 'createLimiter'

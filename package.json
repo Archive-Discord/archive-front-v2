@@ -8,10 +8,11 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.2",
+    "@headlessui/react": "^1.5.0",
     "axios": "^0.24.0",
     "cookie": "^0.4.1",
-    "dotenv": "^10.0.0",
+    "dayjs": "^1.10.8",
+    "dotenv": "^16.0.0",
     "express-rate-limit": "^6.0.4",
     "fs": "^0.0.1-security",
     "lru-cache": "^6.0.0",
@@ -23,7 +24,10 @@
     "node-fetch": "^3.1.0",
     "oauth-discord": "^1.5.2",
     "react": "^17.0.2",
+    "react-adsense": "^0.1.0",
     "react-dom": "17.0.2",
+    "react-intersection-observer": "^8.33.1",
+    "react-markdown": "^8.0.0",
     "tls": "^0.0.1"
   },
   "devDependencies": {

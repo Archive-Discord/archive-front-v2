@@ -12,7 +12,7 @@ export let NavBarList = [
         "href": "/bots"
     },
     {
-        "name": "서포트서버",
+        "name": "디스코드",
         "href": "/support"
     },
     {
@@ -26,11 +26,6 @@ export let EndPoints = {
         CDN: 'https://cdn.discordapp.com',
     },
     Archive: {
-        API: "https://archiver.me/api"
+        API: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://api.archiver.me/"
     }
 }
-
-export let Scope = ['guilds', 'guilds.join', 'email', 'identify']
-// /api/v1/auth/discord/callback 이걸로 할려고 하는데
-// 그 아카이브 어플게이션 초대할수 있나요? 지금 보냈어여
-//콜백링크 어떤걸로 추가하면될까여?
