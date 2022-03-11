@@ -159,8 +159,8 @@ const PendingServer: NextPage<ServerProps> = ({server, error, statusCode, messag
                 <div className='flex flex-col'>
                     <span className='text-xl font-bold my-2'>관리자</span>
                     {server.owners.map((owner, index) => (
-                        <Link href={`/users/${owner.id}`}>
-                            <a key={index} className='flex flex-row items-center p-2 rounded-3xl my-1 hover:bg-stone-200'>
+                        <Link key={index} href={`/users/${owner.id}`}>
+                            <a className='flex flex-row items-center p-2 rounded-3xl my-1 hover:bg-stone-200'>
                                 <img className='w-10 rounded-full' src={userAvaterLink(owner)}/>
                                 <span className='text-lg ml-2'>{owner.username}<span className='text-gray text-sm'>#{owner.discriminator}</span></span>
                             </a>
