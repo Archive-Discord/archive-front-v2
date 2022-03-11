@@ -1,6 +1,14 @@
 import { ServerList, User } from '@types'
 import { EndPoints } from '@utils/Constants'
 
+enum ArchvieUserFlags {
+	general = 0 << 0,
+	manager = 1 << 0,
+	bughunter = 1 << 1,
+	reviewer = 1 << 2,
+	premium = 1 << 3
+}
+
 /**
  * @param router useRouter `router` 오브젝트
  * @param to 리다이렉트할 주소 
@@ -35,4 +43,17 @@ export function formatNumber(value: number):string  {
 	if(suffixNum ===  1 && shortValue < 1) return Number(shortValue) * 10 + '천'
 	else if(shortValue === 1000) return '1천'
 	return shortValue+suffixes[suffixNum]
+}
+
+export function isValidURL(string: string): boolean {
+	var res = string.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+	return (res !== null)
+}
+
+export function checkUserFlag(base: number, required: number | keyof typeof ArchvieUserFlags):boolean {
+	return checkFlag(base, typeof required === 'number' ? required : ArchvieUserFlags[required])
+}
+
+function checkFlag(base: number, required: number) {
+	return (base & required) === required
 }

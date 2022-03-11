@@ -1,13 +1,17 @@
-export type Category = "봇" | "관리" | "개발" | "게임" | "마인크래프트" | "배틀그라운드" | "오버워치"
 export type ApiRequestType = "servers" | "bots"
 
 export interface User {
 	id: string
-	username: string
-	discriminator: string
-	avatar: string
-	bot: boolean
-	flags: number
+	username?: string
+	discriminator?: string
+	avatar?: string
+	bot?: boolean
+	flags?: number
+}
+
+export interface CategoryType {
+	id: number,
+	name: string,
 }
 export interface Guild {
 	id: string
@@ -62,10 +66,10 @@ export interface ServerList {
 	id: string;
 	sortDescription?: string;
 	description?: string;
-	icon?: string;
+	icon: string;
 	like?: number;
-	name: string;
-	bot: boolean;
+	name?: string;
+	bot?: boolean;
 	categories?: string[];
 	members?: number;
 	flags?: number;
@@ -97,3 +101,15 @@ export interface DiscordUserGuild {
 	bot: boolean;
 	features: string[];
 }
+
+export interface submitList {
+	id: string;
+	name: string;
+	description: string;
+	icon: string;
+	type: submitCategory;
+  	update: boolean;
+	published_date: Date;
+}
+
+type submitCategory = "bot" | "server"

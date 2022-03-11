@@ -1,19 +1,17 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import {useRouter} from 'next/router'
+import { EndPoints } from '@utils/Constants'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 function DropDown() {
   const router = useRouter()
-  const onclickButton = () => {
-    router.push('/dashboard')
-  }
 
   const onClickLogout = () => {
     localStorage.removeItem('userData')
-    router.push('/api/v1/auth/logout')
+    window.location.href = `${EndPoints.Archive.API}/auth/logout`
   }
   return (
     <Menu as="div" className="ml-3 relative">

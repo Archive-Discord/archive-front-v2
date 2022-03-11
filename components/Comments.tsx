@@ -66,6 +66,7 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
         setComments(comments.filter(comment => comment.id !== commentId))
     }
     const addComment = async (serverId: string) => {
+        if(!comment) return Toast('리뷰 메시지를 입력해주세요!', 'error')
         await axios.post(`${EndPoints.Archive.API}/servers/${serverId}/comments`, {
             comment: comment
         }).then((data) => {
@@ -100,7 +101,12 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
             </div>
             <hr className='my-8'/>
         </>) : (null)}
-            {comments
+            {comments.length === 0 ?(<>
+                <div className='text-center text-xl my-10'>
+                    리뷰가 없습니다! 가장 먼저 리뷰를 남겨보세요!
+                </div>
+             </>) : (<>
+                {comments
               .sort((a,b) => Number(b.published_date) - Number(a.published_date))
               .map((item, idx) => (
                 <Fragment key={idx}>
@@ -131,7 +137,6 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
                                     </div>
                                 </div>
                             </>)}
-                            <GoogleAds size='short'/>
                         </>
                     ) : (
                         <>
@@ -161,6 +166,8 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
                     )}
                 </Fragment>
             ))}
+             </>)}
+            <GoogleAds size='short'/>
         </>
     )
 }

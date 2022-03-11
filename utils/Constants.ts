@@ -29,3 +29,9 @@ export let EndPoints = {
         API: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://api.archiver.me/"
     }
 }
+
+export let Keys = {
+    Captcha: {
+        CLIENT: "b9427100-570d-4e8a-9256-588bbbf88c60"
+    }
+}

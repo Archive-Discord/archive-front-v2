@@ -45,7 +45,12 @@ const ServerList: NextPage<ServerListProps> = ({ callbackServer }) => {
         </>
       ) : (
         <>
-          {servers
+          {servers.length === 0 ? (<>
+            <div className="text-center mx-auto">
+              <h1 className="text-xl font-bold">추가 가능한 서버가 없습니다!</h1>
+            </div>
+          </>) : (<>
+            {servers
             .sort((a, b) => (a.bot === b.bot ? 0 : a.bot ? -1 : 1))
             .map(server => (
               <>
@@ -98,6 +103,7 @@ const ServerList: NextPage<ServerListProps> = ({ callbackServer }) => {
                 </div>
               </>
             ))}
+          </>)}
         </>
       )}
     </>

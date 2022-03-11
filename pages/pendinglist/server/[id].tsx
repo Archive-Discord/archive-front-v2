@@ -4,50 +4,101 @@ import { ServerList } from '@types'
 import { formatNumber, guildProfileLink, userAvaterLink } from '@utils/Tools'
 import type { GetServerSideProps, NextPage } from 'next'
 import styles from '../../../styles/Server.module.css'
-import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import DenyModal, { denyModalcallBackType } from '@components/pendinglist/denyModal'
+import { useState } from 'react'
 import Link from 'next/link'
 import Markdown from '@components/MarkDown'
 import GoogleAds from '@components/GoogleAds'
 import Comments from '@components/Comments'
 import ErrorPage from '@components/ErrorPage'
+import axios, { AxiosError } from 'axios'
+import Toast from '@components/Toast'
+import { useRouter } from 'next/router'
 
 interface ServerProps {
     server: ServerList,
     error?: boolean;
     message?: string;
     statusCode?: number;
+    id: string;
 }
-export const getServerSideProps: GetServerSideProps<ServerProps> = async(context) => {
+export const getServerSideProps: GetServerSideProps = async(context) => {
   
-  let server = (await fetch(
-    `${process.env.API_DOMAIN}/servers/${encodeURI(context.params.id as string)}`
-  )
+  let server = (await fetch(`${process.env.API_DOMAIN}/submit/submitlist/server/${encodeURI(context.params.id as string)}`, {
+    headers: {
+        "Authorization": "Bearer " + context.req.cookies['Authorization']
+    }
+  })
   .then(res => res.json())) as any;
   if(server.status !== 200) {
-    return {
+    return {    
         props: {
             server: null,
             error: true,
             message: server.message,
-            statusCode: server.status
+            statusCode: server.status,
+            id: context.params.id
         },
     };
   }
   return {
     props: {
-        server: server.data,
-        error: false,
-        message: server.message,
-        statusCode: server.status
+      server: server.data,
+      error: false,
+      message: server.message,
+      statusCode: server.status,
+      id: context.params.id
     },
   };
 };
-const Home: NextPage<ServerProps> = ({server, error, statusCode, message}) => {
+const PendingServer: NextPage<ServerProps> = ({server, error, statusCode, message, id}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [reason, setReason] = useState<string>();
+  const router = useRouter()
+  const acceptServer = async() => {
+    await axios.patch(`/submit/submitlist/server/${id}/accept`)
+     .then((res) => {
+        Toast('심사를 성공적으로 승인했습니다.', 'success')
+        Toast('잠시후 심사목록 페이지로 이동합니다.', 'success')
+        setTimeout(() => {
+            router.push('/pendinglist')
+        }, 3000)
+     }).catch((e: AxiosError) => {
+        Toast(e.response.data.message, 'error')
+     })
+  }
+
+  const denyServer = async() => {
+    if(!reason) return Toast('거절 사유를 입력해주세요!', 'error')
+    await axios.patch(`/submit/submitlist/server/${id}/deny`, {
+        reason: reason
+    })
+     .then((res) => {
+        Toast('심사를 성공적으로 거절했습니다.', 'success')
+        Toast('잠시후 심사목록 페이지로 이동합니다.', 'success')
+        setTimeout(() => {
+            router.push('/pendinglist')
+        }, 3000)
+     }).catch((e: AxiosError) => {
+        Toast(e.response.data.message, 'error')
+     })
+  }
+
+  const denyModalShow = (status: boolean, type: denyModalcallBackType) => {
+    setIsOpen(status)
+    if(type === "CONFIRM") {
+        denyServer()
+    }
+  }
+
+  const reasonHanler = (reason: string) => {
+    setReason(reason)
+  }
+
   if(error) return <ErrorPage statusCode={statusCode} message={message}/>
   return (
     <div className={styles.container}>
-      <HeadInfo title={'아카이브 - ' + server.name} description={server.sortDescription} image={guildProfileLink(server)}/>
+      <HeadInfo title={server.name + " 심사 - 아카이브"} description={server.sortDescription} image={guildProfileLink(server)}/>
       <div className='flex lg:flex-row lg:justify-between lg:flex-nowarp flex-col items-center justify-center flex-warp mx-4'>
         <div className='flex lg:flex-row flex-col items-center'>
             <img className='lg:w-40 w-36 rounded-3xl' src={guildProfileLink(server)}/>
@@ -63,12 +114,8 @@ const Home: NextPage<ServerProps> = ({server, error, statusCode, message}) => {
             </div>
         </div>
         <div className='flex flex-row items-center text-xl lg:mt-0 mt-5'>
-            <Link href={`/servers/${server.id}/invite`}>
-                <a className='border bg-sky-500 px-5 rounded-xl text-white py-2 mx-1 hover:bg-sky-400 transform hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'>입장하기</a>
-            </Link>
-            <Link href={`/servers/${server.id}/like`}>
-                <a className='border px-5 rounded-xl py-2 mx-1 hover:bg-stone-200 hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'><i className="fas fa-caret-up mr-2"/>좋아요 ({formatNumber(server.like)})</a>
-            </Link>
+            <button onClick={() => (acceptServer())} className='border bg-sky-500 px-5 rounded-xl text-white py-2 mx-1 hover:bg-sky-600 transform hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'>승인하기</button>
+            <button onClick={() => (setIsOpen(true))} className='border bg-red-500 px-5 rounded-xl text-white py-2 mx-1 hover:bg-red-700 hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'>거절하기</button>
         </div>
       </div>
       <div className="max-w-7xl my-2 mx-auto">
@@ -79,43 +126,6 @@ const Home: NextPage<ServerProps> = ({server, error, statusCode, message}) => {
             <button className='py-2 relative border-b border-sky-400 text-3xl'>
                 소개
             </button>
-        </div>
-        <div className='flex items-center mr-2'>
-            <Menu as="div" className="ml-3 relative">
-                <div>
-                    <Menu.Button>
-                        <i className="fas fa-info border px-4 py-2 rounded-xl py-2 mx-1 hover:bg-stone-200"/>
-                    </Menu.Button>
-                </div>
-                <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                >
-                    <Menu.Items className="origin-top-right absolute right-0 mt-2 w-36 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <Menu.Item>
-                        {({ active }) => (
-                            <>
-                            <Link href={`/servers/${server.id}/report`}>
-                                <a>
-                                    <div className='flex items-center px-4 py-2'>
-                                    <a className={classNames(active ? 'bg-gray-100' : '', 'block text-rose-600 hover:text-sky-500 hover:underline hover:underline-offset-4')}>
-                                        신고
-                                    </a>
-                                    </div>
-                                </a>
-                            </Link>
-                            </>
-                        )}
-                        </Menu.Item>
-
-                    </Menu.Items>
-                </Transition>
-                </Menu>
         </div>
       </div>
       <div className='lg:flex lg:flex-row-reverse'>
@@ -178,12 +188,10 @@ const Home: NextPage<ServerProps> = ({server, error, statusCode, message}) => {
                 </div>
           </div>
       </div>
+      {isOpen ? (<DenyModal showCallback={denyModalShow} reasonCallback={reasonHanler} />): null}
     </div>
   )
 }
 
-export default Home
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
+export default PendingServer;
 

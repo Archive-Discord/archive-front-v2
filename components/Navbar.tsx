@@ -3,12 +3,13 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { User } from '@types'
 import { EndPoints, NavBarList } from '@utils/Constants'
-import { userAvaterLink } from '@utils/Tools'
+import { checkUserFlag, userAvaterLink } from '@utils/Tools'
 import Link from 'next/link'
 import Dropdown from '@components/UserDropDown'
 
 const NavBar: NextPage = () => {
   const [user, setUser] = useState<User>()
+  const [flags, setFlags] = useState<number>()
   const [navBarOpen, setNavBarOpen] = useState<boolean>()
   const OnclickNavBarOpen = () => {
     if (navBarOpen) {
@@ -23,11 +24,9 @@ const NavBar: NextPage = () => {
     window.location.href = `${EndPoints.Archive.API}/auth/discord`
   }
   useEffect(() => {
-		if(localStorage.userData) {
-			return setUser(JSON.parse(localStorage.userData) || null)
-		}
 		axios.get('/users/@me').then(data => {
 			if(data.status !== 200) return setUser(null)
+      setFlags(data.data.data.archive_flags)
 			return setUser(JSON.parse(localStorage.userData = JSON.stringify(data.data.data.user)))
 		}).catch((e) => (
       setUser(null)
@@ -64,6 +63,17 @@ const NavBar: NextPage = () => {
                   </a>
                 </Link>
               ))}
+              {user ? (<>
+              {
+                checkUserFlag(flags, 'reviewer') ? (<>
+                  <Link href={'/pendinglist'}>
+                    <a className="block mt-4 lg:inline-block lg:mt-0 rounded-lg px-3 py-2 text-gray-700 font-medium hover:text-sky-500 hover:underline hover:underline-offset-4">
+                      리뷰 대기목록
+                    </a>
+                  </Link>
+                </>) : (null)
+              }
+              </>) : (null)}
             </div>
             <div>
           {user ? (
