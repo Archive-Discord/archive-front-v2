@@ -20,15 +20,26 @@ const ServerCard: NextPage<ServerListProps> = ({guild}) => {
           </div>
         </div>
         <hr className='mt-auto'/>
-        <Link href={`/servers/${guild.id}/invite`}>
-          <div className="flex p-4 hover:bg-gray-100 hover:text-sky-500 hover:underline hover:underline-offset-4">
-            <div className="w-full text-center">
-                <a>
-                  입장하기  
-                </a>
+        <div className='flex '>
+          <Link href={`/servers/${guild.id}`}>
+            <div className="flex p-4 hover:bg-gray-100 hover:text-sky-500 hover:underline hover:underline-offset-4 w-full">
+              <div className="w-full text-center">
+                  <a>
+                    확인하기
+                  </a>
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+          <Link href={`/servers/${guild.id}/invite`}>
+            <div className="flex p-4 hover:bg-gray-100 hover:text-sky-500 hover:underline hover:underline-offset-4 w-full">
+              <div className="w-full text-center">
+                  <a>
+                    입장하기  
+                  </a>
+              </div>
+            </div>
+          </Link>
+        </div>
     </div>
   </Link>
   )
