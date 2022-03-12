@@ -22,7 +22,7 @@ const ServerCard: NextPage<ServerListProps> = ({guild}) => {
         <hr className='mt-auto'/>
         <div className='flex '>
           <Link href={`/servers/${guild.id}`}>
-            <div className="flex p-4 hover:bg-gray-100 hover:text-sky-500 hover:underline hover:underline-offset-4 w-full">
+            <div className="flex p-4 hover:bg-gray-100 hover:text-sky-500 hover:underline hover:underline-offset-4 w-full border-r">
               <div className="w-full text-center">
                   <a>
                     확인하기
