@@ -1,35 +1,33 @@
-import GoogleAds from "@components/GoogleAds";
 import HeadInfo from "@components/HeadInfo";
 import Paginator from "@components/Paginator";
-import ServerCard from "@components/ServerCard";
-import { ServerList } from "@types";
+import BotCard from "@components/BotCard";
+import { Bot, ServerList } from "@types";
 import type { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import styles from "../../styles/Home.module.css";
 import listpage from "../../styles/listPage.module.css";
+import GoogleAds from "@components/GoogleAds";
 
-interface HomeProps {
-  server: {
-    server: ServerList[];
+interface BotsProps {
+  bot: {
+    bot: Bot[];
     totalPage: number;
   };
   page: number;
 }
-export const getServerSideProps: GetServerSideProps<
-  HomeProps
-> = async context => {
+export const getServerSideProps: GetServerSideProps<BotsProps> = async context => {
   if (!context.query.page) context.query.page = "1";
-  let server = (await fetch(
-    `${process.env.API_DOMAIN}/servers?page=${context.query.page}`
+  let bot = (await fetch(
+    `${process.env.API_DOMAIN}/bots?page=${context.query.page}`
   ).then(res => res.json())) as any;
   return {
     props: {
-      server: server.data,
+      bot: bot.data,
       page: Number(context.query.page),
     },
   };
 };
-const Home: NextPage<HomeProps> = ({ server, page }) => {
+const Home: NextPage<BotsProps> = ({ bot, page }) => {
   return (
     <>
       <HeadInfo title="서버목록 - 아카이브" />
@@ -38,20 +36,20 @@ const Home: NextPage<HomeProps> = ({ server, page }) => {
         <GoogleAds size='short'/>
       </div>
         <div className={styles.lists}>
-          {server.server
+          {bot.bot
             .slice(0, 12)
             .sort((a, b) => b.like - a.like)
             .map((item, index) => (
               <>
-                <ServerCard guild={item} key={index} />
+                <BotCard bot={item} key={index} />
               </>
             ))}
         </div>
         <div className="flex justify-center mb-10">
           <Paginator
             currentPage={page}
-            totalPage={Math.ceil(server.totalPage / 12)}
-            pathname="/servers"
+            totalPage={Math.ceil(bot.totalPage / 12)}
+            pathname="/bots"
           />
         </div>
       </div>
@@ -60,7 +58,7 @@ const Home: NextPage<HomeProps> = ({ server, page }) => {
       </div>
       <div className={listpage.overlay + " transform hover:-translate-y-2 transition duration-200 animate-bounce ease-in cursor-pointer"}>
           <div className={listpage.overlaybg}/>
-          <Link href={`/servers/dashboard/addserver`}>
+          <Link href={`/bots/dashboard/addbot`}>
             <a className="flex w-full h-full">
             <svg className="m-auto" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     width="32px" height="32px" viewBox="0 0 45.402 45.402"

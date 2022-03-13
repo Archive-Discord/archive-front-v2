@@ -53,8 +53,8 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
         ))
     }, [])
 
-    const deleteComment = async (commentId: string, serverId: string) => {
-        await axios.delete(`${EndPoints.Archive.API}/servers/${serverId}/comments`, {
+    const deleteComment = async (commentId: string) => {
+        await axios.delete(`${EndPoints.Archive.API}/${type}/${id}/comments`, {
             data: {
                 id: commentId
             }
@@ -65,9 +65,9 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
         })
         setComments(comments.filter(comment => comment.id !== commentId))
     }
-    const addComment = async (serverId: string) => {
+    const addComment = async () => {
         if(!comment) return Toast('리뷰 메시지를 입력해주세요!', 'error')
-        await axios.post(`${EndPoints.Archive.API}/servers/${serverId}/comments`, {
+        await axios.post(`${EndPoints.Archive.API}/${type}/${id}/comments`, {
             comment: comment
         }).then((data) => {
             setComment(undefined)
@@ -96,7 +96,7 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
                     <a className='lg:text-xl text-lg'>{user.username}</a>
                     </Link>
                     <textarea value={comment} onChange={(e) => (setComment(e.target.value))} placeholder='리뷰를 남겨주세요!' className='p-4 border rounded-xl mt-2 bg-stone-100' style={{height: "130px"}}/>
-                    <button onClick={() => (addComment(id))} className='w-24 rounded-xl mt-4 bg-stone-100 px-4 py-1 text-lg hover:bg-stone-200'>등록</button>
+                    <button onClick={() => (addComment())} className='w-24 rounded-xl mt-4 bg-stone-100 px-4 py-1 text-lg hover:bg-stone-200'>등록</button>
                 </div>
             </div>
             <hr className='my-8'/>
@@ -130,7 +130,7 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
                                                 </a>
                                             </Link>
                                             {user && user.id === item.user.id ? (<>
-                                                <button onClick={() => (deleteComment(item.id, item.server_id))} className='items-center mr-2 text-red-500'><i className="fas fa-trash"/></button>
+                                                <button onClick={() => (deleteComment(item.id))} className='items-center mr-2 text-red-500'><i className="fas fa-trash"/></button>
                                             </>) : (null)}
                                         </div>
                                         <p className='p-4 border rounded-xl mt-2 bg-stone-100'>{item.comment}</p>
@@ -155,7 +155,7 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
                                             </a>
                                         </Link>
                                         {user && user.id === item.user.id ? (<>
-                                            <button onClick={() => (deleteComment(item.id, item.server_id))} className='items-center mr-2 text-red-500'><i className="fas fa-trash"/></button>
+                                            <button onClick={() => (deleteComment(item.id))} className='items-center mr-2 text-red-500'><i className="fas fa-trash"/></button>
                                         </>) : (null)}
                                     </div>
                                     <p className='p-4 border rounded-xl mt-2 bg-stone-100'>{item.comment}</p>

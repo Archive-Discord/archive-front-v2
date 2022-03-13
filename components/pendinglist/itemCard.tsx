@@ -1,5 +1,5 @@
 import { submitList } from "@types";
-import { guildProfileLink, userAvaterLink } from "@utils/Tools";
+import { guildProfileLink, userAvaterLink, userAvaterLinkAsPending } from "@utils/Tools";
 import type { NextPage } from "next";
 import Link from "next/link";
 
@@ -12,7 +12,10 @@ const ItemList: NextPage<itemCardProps> = ({ items }) => {
     <>
        {items
 
-            .sort((a, b) => (Number(a.published_date) - Number(b.published_date)))
+            .sort((a, b) => {
+              // @ts-ignore
+              return new Date(a.published_date) - new Date(b.published_date)
+            })
             .map(item => (
               <>
                 <div
@@ -22,7 +25,7 @@ const ItemList: NextPage<itemCardProps> = ({ items }) => {
                 >
                   <img
                     className="w-32 mx-auto rounded-full -mt-8 border-8 border-white"
-                    src={(item.type === "server") ? guildProfileLink(item) : userAvaterLink(item)}
+                    src={(item.type === "server") ? guildProfileLink(item) : userAvaterLinkAsPending(item)}
                     alt=""
                   />
                   <span className="mx-4 py-1 px-5 border rounded-md w-fit -mt-10">{item.type === "server" ? "서버" : "봇"}</span>

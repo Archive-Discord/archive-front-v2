@@ -1,4 +1,4 @@
-import { ServerList, User } from '@types'
+import { BotUserPending, ServerList, User } from '@types'
 import { EndPoints } from '@utils/Constants'
 
 enum ArchvieUserFlags {
@@ -25,6 +25,11 @@ export function redirectTo(router, to: string) {
 export const userAvaterLink = (user: User): string => {
     if(!user.avatar) return `${EndPoints.Discord.CDN}/embed/avatars/${Number(user.discriminator) % 5}.png`
     return `${EndPoints.Discord.CDN}/avatars/${user.id}/${user.avatar}`
+}
+
+export const userAvaterLinkAsPending = (user: BotUserPending): string => {
+    if(!user.icon) return `${EndPoints.Discord.CDN}/embed/avatars/${Number(user.discriminator) % 5}.png`
+    return `${EndPoints.Discord.CDN}/avatars/${user.id}/${user.icon}`
 }
 
 export const guildProfileLink = (guild: ServerList): string => {

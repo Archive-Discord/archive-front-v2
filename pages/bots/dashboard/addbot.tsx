@@ -63,6 +63,7 @@ const Addbot: NextPage = () => {
   const [description, setDescription] = useState<string>(defaltDescripton)
   const [sortDescription, setSortDescription] = useState<string>()
   const [prefix, setPrefix] = useState<string>("접두사")
+  const [invite, setInvite] = useState<string>()
   const [login, setLogin] = useState<boolean>(true)
   const [agreement, setAgreement] = useState<boolean>(false)
   const router = useRouter()
@@ -110,6 +111,9 @@ const Addbot: NextPage = () => {
     if(!prefix) {
       return Toast('접두사를 입력해주세요', 'error')
     }
+    if(!invite) {
+      return Toast('초대링크를 입력해주세요', 'error')
+    }
 
     await axios.post('/bots/submit', {
       id: bot.id,
@@ -117,7 +121,8 @@ const Addbot: NextPage = () => {
       description: description,
       sortDescription: sortDescription,
       website: website,
-      support: supprot
+      support: supprot,
+      invite: invite
     }).then((data) => {
       Toast('성공적으로 신청이 완료되었습니다! \n 승인까지 최대 3일이 걸릴 수 있습니다', 'success')
       Toast('잠시후 메인페이지로 이동됩니다', 'success')
@@ -183,6 +188,13 @@ const Addbot: NextPage = () => {
                         <span className='text-sm'>봇의 명령어를 사용하기 위한 접두사를 입력해 주세요 (최대 3글자)</span>
                     </div>
                     <input value={prefix} onChange={(e) => (setPrefix(e.target.value))} placeholder='/' maxLength={3} className='mt-2 lg:mt-0 w-full p-4 h-10 border rounded-md cursor-default focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500'/>
+                </div>
+                <div className='flex justify-between items-center w-full flex-row lg:flex-nowrap flex-wrap mt-6'>
+                    <div className='flex flex-wrap flex-col w-full'>
+                        <span className='text-2xl text-sky-500'>초대링크*</span>
+                        <span className='text-sm'>봇을 초대하기 위한 초대 링크를 입력해 주세요</span>
+                    </div>
+                    <input value={invite} onChange={(e) => (setInvite(e.target.value))} placeholder='https://discord.com/api/oauth2/authorize?client_id=951861483170578502&permissions=8&scope=bot%20applications.commands' className='mt-2 lg:mt-0 w-full p-4 h-10 border rounded-md cursor-default focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500'/>
                 </div>
                 <div className='flex justify-between items-center w-full flex-row lg:flex-nowrap flex-wrap mt-6'>
                     <div className='flex flex-wrap flex-col w-full'>

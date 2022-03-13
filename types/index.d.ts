@@ -9,6 +9,15 @@ export interface User {
 	flags?: number
 }
 
+export interface BotUserPending {
+	id: string
+	name?: string
+	discriminator?: string
+	icon?: string
+	bot?: boolean
+	flags?: number
+}
+
 export interface CategoryType {
 	id: number,
 	name: string,
@@ -27,18 +36,22 @@ export interface Guild {
 
 export interface Bot {
   id: string
-  owners: string[],
+  name: string
+  owners: User[],
   description: string,
-  category: Category[],
+  categories: string[],
   prefix: string,
-  homepage?: string,
+  website?: string,
   sortDescription: string,
   invite: string,
-  supportserver?: string,
+  support?: string,
   flags: number,
   like: number,
   token: string,
-  server: number
+  new: boolean
+  servers: number
+  icon: string
+  created_at: Date
 }
 
 export interface Comment {
