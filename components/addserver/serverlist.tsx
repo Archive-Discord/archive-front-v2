@@ -37,6 +37,10 @@ const ServerList: NextPage<ServerListProps> = ({ callbackServer }) => {
     setSelectServer(server);
   };
 
+  const inviteBot = (server: DiscordUserGuild) => {
+    window.open(`https://discord.com/api/oauth2/authorize?client_id=951861483170578502&permissions=8&scope=bot%20applications.commands&guild_id=${server.id}&disable_guild_select=true`, "초대하기", "width=450, height=800")
+  }
+
   return (
     <>
       {loading ? (
@@ -93,7 +97,7 @@ const ServerList: NextPage<ServerListProps> = ({ callbackServer }) => {
                     </>
                   ) : (
                     <>
-                      <button className="flex p-4 text-sky-500 hover:text-white rounded-b-2xl text-sm font-bold hover:bg-sky-500">
+                      <button onClick={() => (inviteBot(server))} className="flex p-4 text-sky-500 hover:text-white rounded-b-2xl text-sm font-bold hover:bg-sky-500">
                         <div className="w-full text-center">
                           <a>초대하기</a>
                         </div>
