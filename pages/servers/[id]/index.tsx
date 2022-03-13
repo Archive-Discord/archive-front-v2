@@ -47,7 +47,7 @@ const Home: NextPage<ServerProps> = ({server, error, statusCode, message}) => {
   if(error) return <ErrorPage statusCode={statusCode} message={message}/>
   return (
     <div className={styles.container}>
-      <HeadInfo title={'아카이브 - ' + server.name} description={server.sortDescription} image={guildProfileLink(server)}/>
+      <HeadInfo title={server.name + ' - 아카이브'} description={server.sortDescription} image={guildProfileLink(server)}/>
       <div className='flex lg:flex-row lg:justify-between lg:flex-nowarp flex-col items-center justify-center flex-warp mx-4'>
         <div className='flex lg:flex-row flex-col items-center'>
             <img className='lg:w-40 w-36 rounded-3xl' src={guildProfileLink(server)}/>

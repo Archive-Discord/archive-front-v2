@@ -10,7 +10,7 @@ import styles from '../../../styles/Home.module.css'
 const Home: NextPage = () => {
   return (
     <div className={styles.container} style={{marginTop: "9rem"}}>
-      <HeadInfo title='아카이브 - 서버관리'/>
+      <HeadInfo title='봇 관리 - 아카이브'/>
       <div className={styles.lists}>
         
       </div>
