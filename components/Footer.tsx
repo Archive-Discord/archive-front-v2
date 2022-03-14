@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
                     </h2>
                     <ul className="mb-8 space-y-2 text-base list-none">
                     <li>
-                        <Link href={"/commands"}>
+                        <Link href={"/support"}>
                         <a className="text-gray-600 hover:text-gray-800 dark:text-white">디스코드</a>
                         </Link>
                     </li>

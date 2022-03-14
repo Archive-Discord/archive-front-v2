@@ -8,19 +8,23 @@ const BotCard: NextPage<BotListProps> = ({bot}) => {
   }
   return (
       <div className="flex flex-col min-w-[23rem] max-w-[23rem] mx-auto bg-white shadow-xl mx-2 mb-20 min-h-[20rem] max-h-[20rem] rounded-2xl transform hover:scale-105	 transition duration-100 ease-in cursor-pointer" style={{fontFamily: "nanumsquare"}}> 
-        <img className="w-32 mx-auto rounded-full -mt-8 border-8 border-white" src={userAvaterLinkAsPending(bot)} alt=""/>
-        <p className="px-6 font-semibold text-2xl mt-2 truncate">{bot.name}</p>
-        <p className="mb-2 px-6 h-11 text-left text-sm font-medium text-ellipsis overflow-hidden mt-5">
-          {bot.sortDescription}
-        </p>
-        <div className='flex flex-row px-6'>
-          <div className='py-1 px-3 flex flex-row items-center'>
-            <i className="fas fa-server mr-2"/>{formatNumber(bot.servers)}개
+        <Link href={`/bots/${bot.id}`}>
+          <a>
+          <img className="w-32 mx-auto rounded-full -mt-8 border-8 border-white" src={userAvaterLinkAsPending(bot)} alt=""/>
+          <p className="px-6 font-semibold text-2xl mt-2 truncate">{bot.name}</p>
+          <p className="mb-2 px-6 h-11 text-left text-sm font-medium text-ellipsis overflow-hidden mt-5">
+            {bot.sortDescription}
+          </p>
+          <div className='flex flex-row px-6'>
+            <div className='py-1 px-3 flex flex-row items-center'>
+              <i className="fas fa-server mr-2"/>{formatNumber(bot.servers)}개
+            </div>
+            <div className='ml-2 px-2 flex flex-row items-center'>
+            <i className="fas fa-thumbs-up mr-2"/>{formatNumber(bot.like)}개
+            </div>
           </div>
-          <div className='ml-2 px-2 flex flex-row items-center'>
-          <i className="fas fa-thumbs-up mr-2"/>{formatNumber(bot.like)}개
-          </div>
-        </div>
+          </a>
+        </Link>
         <hr className='mt-auto'/>
         <div className='flex '>
           <Link href={`/bots/${bot.id}`}>
