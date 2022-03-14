@@ -11,7 +11,7 @@ interface ErrorPageProps {
 
 const ErrorPage: NextPage<ErrorPageProps> = ({statusCode, message}) => {
 	return <>
-        <HeadInfo title='아카이브 - 오류'/>
+        <HeadInfo title={`${message} - 아카이브`}/>
 		<div className="flex h-[100vh] w-full items-center flex-row justify-center" style={{fontFamily: "nanumsquare"}}>
           <span className='text-4xl font-bold border-r-2 pr-8'>{statusCode}</span>
           <span className='text-2xl pl-8'>{message}</span>

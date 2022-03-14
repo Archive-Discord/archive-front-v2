@@ -89,7 +89,7 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
         {user ? (<>
             <div className='flex flex-row' ref={ref}>
                 <Link href={`/users/${user.id}`}>
-                  <a><img className='lg:w-12 w-12' src={userAvaterLink(user)}/></a>
+                  <a><img className='lg:w-12 w-12 rounded-2xl' src={userAvaterLink(user)}/></a>
                 </Link>
                 <div className='flex flex-col w-full ml-4'>
                     <Link href={`/users/${user.id}`}>
@@ -117,7 +117,7 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
                             </>) : (<>
                                 <div className='flex flex-row'>
                                     <Link href={`/users/${item.user.id}`}>
-                                        <a><img className='lg:w-12 w-12' src={userAvaterLink(item.user)}/></a>
+                                        <a><img className='lg:w-12 w-12 rounded-2xl' src={userAvaterLink(item.user)}/></a>
                                     </Link>
                                     <div className='flex flex-col w-full ml-4'>
                                         <div className='flex flex-row justify-between'> 
@@ -142,7 +142,7 @@ const Comments: React.FC<CommentsProps> = ({type, id}) => {
                         <>
                             <div className='flex flex-row'>
                                 <Link href={`/users/${item.user.id}`}>
-                                    <a><img className='lg:w-12 w-12' src={userAvaterLink(item.user)}/></a>
+                                    <a><img className='lg:w-12 w-12 rounded-2xl' src={userAvaterLink(item.user)}/></a>
                                 </Link>
                                 <div className='flex flex-col w-full ml-4'>
                                     <div className='flex flex-row justify-between'> 
