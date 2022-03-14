@@ -165,7 +165,7 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, id}) =
                         </Link>
                     ))}
                 </div>
-                {bot.website && bot.support ? (
+                {bot.website || bot.support ? (
                     <>
                     <div className='flex flex-col'>
                     <span className='text-xl font-bold my-2'>관련링크</span>

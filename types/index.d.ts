@@ -89,6 +89,8 @@ export interface ServerList {
 	create_date?: Date;
 	published_date?: Date;
 	owners?: User[];
+	website?: string;
+	support?:string;
 }
 
 export interface Server {

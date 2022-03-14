@@ -157,6 +157,25 @@ const Home: NextPage<ServerProps> = ({server, error, statusCode, message}) => {
                         </Link>
                     ))}
                 </div>
+                {server.website || server.support ? (
+                    <>
+                    <div className='flex flex-col'>
+                    <span className='text-xl font-bold my-2'>관련링크</span>
+                    <div className='flex flex-row flex-wrap'>
+                        {server.support ? (<>
+                            <a href={server.support} rel="noreferrer" target="_blank" className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
+                                <span className='text-base p-1 px-2'>서포트 서버</span>
+                            </a>
+                        </>) : (null)}
+                        {server.website ? (<>
+                            <a href={server.website} rel="noreferrer" target="_blank" className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
+                                <span className='text-base p-1 px-2'>홈페이지</span>
+                            </a>
+                        </>) : (null)}
+                    </div>
+                </div>
+                    </>
+                ) : (null)}
               </div>
           </div>
           <div className='w-full lg:pr-5 lg:w-3/4'>
