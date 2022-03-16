@@ -1,0 +1,8 @@
+#!/bin/sh
+ssh root <<EOF
+    cd /home/archve/archive-front-v2
+    git pull
+    npm install -g pm2
+    pm2 restart ecosystem.config.js
+    exit
+EOF
