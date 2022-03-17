@@ -13,18 +13,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: install
-      - name: build
+      - name: Install and Build
         uses: actions/setup-node@v1
-        with:
-          cmd: build
-      - name: export
-        uses: borales/actions-yarn@v2.3.0
-        with:
-          cmd: export
+      - run: npm install
+      - run: npm run build
+      - run: npm run export
         env:
           CI: true
           DEPLOY_TARGET: gh-pages
