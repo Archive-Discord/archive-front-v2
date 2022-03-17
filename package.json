@@ -6,8 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export",
-    "deploy": "serverless"
+    "export": "next export"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.1.1",
