@@ -26,7 +26,7 @@ export let EndPoints = {
         CDN: 'https://cdn.discordapp.com',
     },
     Archive: {
-        API: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://api.archiver.me/"
+        API: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://api.archiver.me"
     }
 }
 
