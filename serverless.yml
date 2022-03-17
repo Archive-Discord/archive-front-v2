@@ -1,9 +1,0 @@
-myNextApplication:
-  component: '@sls-next/serverless-component@latest'
-  inputs:
-    name:
-      defaultLambda: archive
-      imageLambda: archiveFrontLambda	
-    bucketRegion: 'ap-northeast-2'
-    cloudfront:
-      comment: 'archive deploy'
