@@ -1,5 +1,5 @@
 #!/bin/sh
-ssh jenkins <<EOF
+ssh jenkins@archive <<EOF
     cd /home/archve/archive-front-v2
     git pull
     npm install -g pm2
