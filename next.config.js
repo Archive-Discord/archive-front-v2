@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production'
 module.exports = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  assetPrefix: isProd ? '/archive-front-v2/' : ''
 }
