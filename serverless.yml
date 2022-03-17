@@ -1,0 +1,9 @@
+myNextApplication:
+  component: '@sls-next/serverless-component@latest'
+  inputs:
+    name:
+      defaultLambda: archive	#Default Lambda의 이름 설정 
+      imageLambda: archiveFrontLambda	# Image Lambda의 이름 설정
+    bucketRegion: 'ap-northeast-2'	# S3 Bucket 지역 설정
+    cloudfront:
+      comment: 'archive deploy'
