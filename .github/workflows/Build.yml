@@ -15,9 +15,10 @@ jobs:
 
       - name: Install and Build
         uses: actions/setup-node@v1
-      - run: npm install
-      - run: npm run build
-      - run: npm run export
+        uses: borales/actions-yarn@v2.3.0
+      - run: yarn
+      - run: yarn build
+      - run: yarn export
         env:
           CI: true
           DEPLOY_TARGET: gh-pages
