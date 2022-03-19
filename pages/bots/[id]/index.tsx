@@ -1,11 +1,11 @@
 import HeadInfo from '@components/HeadInfo'
 import DateFormet from '@utils/Date'
-import { Bot, ServerList } from '@types'
+import { Bot, ServerList, User } from '@types'
 import { formatNumber, guildProfileLink, userAvaterLink, userAvaterLinkAsPending } from '@utils/Tools'
 import type { GetServerSideProps, NextPage } from 'next'
 import styles from '../../../styles/Server.module.css'
 import DenyModal, { denyModalcallBackType } from '@components/pendinglist/denyModal'
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Markdown from '@components/MarkDown'
 import GoogleAds from '@components/GoogleAds'
@@ -22,6 +22,7 @@ interface botProps {
     message?: string;
     statusCode?: number;
     id: string;
+    auth?: string
 }
 export const getServerSideProps: GetServerSideProps = async(context) => {
   
@@ -34,7 +35,8 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
             error: true,
             message: bot.message,
             statusCode: bot.status,
-            id: context.params.id
+            id: context.params.id,
+            auth: context.req.cookies['Authorization']
         },
     };
   }
@@ -44,11 +46,26 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
       error: false,
       message: bot.message,
       statusCode: bot.status,
-      id: context.params.id
+      id: context.params.id,
+      auth: context.req.cookies['Authorization']
     },
   };
 };
-const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, id}) => {
+const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, auth}) => {
+    const [user, setUser] = useState<User>()
+    useEffect(() => {
+        try {
+			if(localStorage.userData) {
+				setUser(auth ? JSON.parse(localStorage.userData) : null)
+			}
+            axios.get('/users/@me').then(data => {
+                if(data.status !== 200) return setUser(null)
+                return setUser(JSON.parse(localStorage.userData = JSON.stringify(data.data.data.user)))
+            })
+        } catch(e) {
+            setUser(null)
+        }
+    }, [])
 
   const openInviite = (link: string) => {
     window.open(link, "초대하기", "width=450, height=800")
@@ -72,11 +89,20 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, id}) =
                 </span>
             </div>
         </div>
-        <div className='flex flex-row items-center text-xl lg:mt-0 mt-5'>
-            <button onClick={() => (openInviite(bot.invite))} className='border bg-sky-500 px-5 rounded-xl text-white py-2 mx-1 hover:bg-sky-400 transform hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'>초대하기</button>
+        <div className='flex flex-row items-center text-xl lg:mt-0 mt-5 flex-wrap justify-center'>
+            <button onClick={() => (openInviite(bot.invite))} className='lg:mt-0 mt-2 border bg-sky-500 px-5 rounded-xl text-white py-2 mx-1 hover:bg-sky-400 transform hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'>초대하기</button>
             <Link href={`/bots/${bot.id}/like`}>
-                <a className='border px-5 rounded-xl py-2 mx-1 hover:bg-stone-200 hover:-translate-y-1 transition duration-100 ease-in cursor-pointer'><i className="fas fa-caret-up mr-2"/>좋아요 ({formatNumber(bot.like)})</a>
+                <a className='lg:mt-0 border px-5 rounded-xl py-2 mx-1 hover:bg-stone-200 hover:-translate-y-1 transition duration-100 ease-in cursor-pointer mt-2'><i className="fas fa-caret-up mr-2"/>좋아요 ({formatNumber(bot.like)})</a>
             </Link>
+            {user ? (<>
+                {bot.owners.filter(el => {
+                    return el.id === user.id
+                }).length === 0 ? (null) : (<>
+                    <Link href={`/bots/${bot.id}/edit`}>
+                        <a className='lg:mt-0 flex items-center border px-5 rounded-xl py-2 mx-1 hover:bg-stone-200 hover:-translate-y-1 transition duration-100 ease-in cursor-pointer mt-2'><i className="fas fa-cog mr-2"/>관리하기</a>
+                    </Link>
+                </>)}
+            </>) : (null)}
         </div>
       </div>
       <div className="max-w-7xl my-2 mx-auto">
@@ -136,12 +162,16 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, id}) =
                         <span>{formatNumber(bot.servers)}개</span>
                     </div>
                     <div className='flex flex-row justify-between p-1'>
-                        <span><i className="fas fa-calendar-alt mr-1"/>서버 생성일</span>
+                        <span><i className="fas fa-calendar-alt mr-1"/>봇 생성일</span>
                         <span>{DateFormet(bot.created_at).fromNow(true)}전 생성</span>
                     </div>
                     <div className='flex flex-row justify-between p-1'>
                         <span><i className="fas fa-thumbs-up mr-1"/>좋아요</span>
                         <span>{formatNumber(bot.like)}개</span>
+                    </div>
+                    <div className='flex flex-row justify-between p-1'>
+                        <span><i className="fas fa-code mr-1"/>접두사</span>
+                        <span>{bot.prefix ? bot.prefix : "없음"}</span>
                     </div>
                 </div>
                 <div className='flex flex-col'>
