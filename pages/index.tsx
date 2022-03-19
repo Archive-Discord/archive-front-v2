@@ -3,7 +3,7 @@ import HeadInfo from '@components/HeadInfo'
 import ServerCard from '@components/ServerCard'
 import BotCard from '@components/BotCard'
 import { Bot, ServerList } from '@types'
-import type { GetServerSideProps, NextPage } from 'next'
+import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,7 +19,7 @@ interface HomeProps {
     totalPage: number;
   }
 }
-export const getServerSideProps = async() => {
+export const getStaticProps: GetStaticProps = async() => {
   let server = (await fetch(`${process.env.API_DOMAIN}/servers`).then(res => res.json())) as any;
   let bots = (await fetch(`${process.env.API_DOMAIN}/bots`).then(res => res.json())) as any;
   return {
@@ -27,6 +27,7 @@ export const getServerSideProps = async() => {
       server: server.data,
       bot: bots.data
     },
+    revalidate: 600
   };
 };
 const Home: NextPage<HomeProps> = ({server, bot}) => {

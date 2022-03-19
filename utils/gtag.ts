@@ -1,5 +1,5 @@
 // lib/gtag.js
-export const GA_TRACKING_ID = "G-K5H8C1P24E";
+export const GA_TRACKING_ID = "UA-61999021-2";
 
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
