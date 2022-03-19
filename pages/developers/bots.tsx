@@ -26,7 +26,7 @@ const StartPge = `
 #### Body
 \`\`\`
 {
-  "server": "10"
+  "servers": 10
 }
 \`\`\`
 ---
