@@ -6,7 +6,6 @@ export default class CustomDocument extends Document {
     return (
       <Html lang="ko">
         <Head>
-            <title>Archive - 아카이브</title>
             <link rel="icon" href="https://archiver.me/favicon.ico" />
             <meta name="description" content={"안전한 디스코드 관련 목록들을 이곳에서 확인하세요!"} />
             <meta name="keyword" content={"아카이브, Archive, 디스코드서버, 디스코드 서버목록, 디스코드 서버 리스트, 디스코드 서버찾기, 디스코드, 디스코드 봇, 디스코드 서버 홍보"} />
