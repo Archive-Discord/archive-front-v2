@@ -59,7 +59,7 @@ const ServerList: NextPage<ServerListProps> = ({ callbackServer }) => {
             .map(server => (
               <>
                 <div
-                  className="flex flex-col min-w-[23rem] max-w-[23rem] mx-auto bg-white shadow-xl mx-2 mb-20 min-h-[17rem] max-h-[17rem] rounded-2xl transform hover:scale-105 transition duration-100 ease-in cursor-pointer"
+                  className="flex flex-col max-w-[23rem] mx-auto bg-white shadow-xl mx-2 mb-20 min-h-[17rem] max-h-[17rem] rounded-2xl transform hover:scale-105 transition duration-100 ease-in cursor-pointer"
                   style={{ fontFamily: "nanumsquare" }}
                 >
                   <img
