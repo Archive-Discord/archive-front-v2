@@ -3,7 +3,6 @@ import styles from "@styles/Home.module.css";
 import PendingCard from "@components/pendinglist/itemCard";
 import { submitList } from "@types";
 import type { GetServerSideProps, NextPage } from "next";
-import Link from "next/link";
 import ErrorPage from "@components/ErrorPage";
 
 interface submitProps {
