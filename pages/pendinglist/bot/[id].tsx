@@ -145,6 +145,10 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, id}) =
                         <span><i className="fas fa-thumbs-up mr-1"/>좋아요</span>
                         <span>{formatNumber(bot.like)}개</span>
                     </div>
+                    <div className='flex flex-row justify-between p-1'>
+                        <span><i className="fas fa-code mr-1"/>접두사</span>
+                        <span>{bot.prefix ? bot.prefix : "없음"}</span>
+                    </div>
                 </div>
                 <div className='flex flex-col'>
                     <span className='text-xl font-bold my-2'>카테고리</span>
@@ -167,13 +171,13 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, id}) =
                         </Link>
                     ))}
                 </div>
-                {bot.website && bot.support ? (
+                {bot.website || bot.support ? (
                     <>
                     <div className='flex flex-col'>
                     <span className='text-xl font-bold my-2'>관련링크</span>
                     <div className='flex flex-row flex-wrap'>
                         {bot.support ? (<>
-                            <a href={bot.support} rel="noreferrer" target="_blank" className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
+                            <a href={`https://discord.gg/${bot.support}`} rel="noreferrer" target="_blank" className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
                                 <span className='text-base p-1 px-2'>서포트 서버</span>
                             </a>
                         </>) : (null)}
