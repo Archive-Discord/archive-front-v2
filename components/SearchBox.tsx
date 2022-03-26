@@ -61,11 +61,11 @@ const SearchBox = () => {
     }
   return (
     <>
-    <div className="min-h-[40vh] lg:max-w-[55vw] max-w-[90vw] flex flex-col justify-center mx-auto" style={{zIndex: "999999"}}>
+    <div className="min-h-[40vh] lg:max-w-[55vw] max-w-[90vw] flex flex-col justify-center mx-auto">
         <div className="flex flex-col items-center ">
             <span className="text-3xl"><span className="text-5xl font-bold">아카이브</span>, 안전한 디스코드 <TypeAnimation cursor={true} sequence={category} wrapper="span" repeat={Infinity}/>목록을...</span>
         </div>
-        <div className="relative mt-4" ref={ref}>
+        <div className="relative mt-4" ref={ref} style={{zIndex: "9999999"}}>
             <input onKeyPress={keypressHandler} placeholder="검색어를 입력해주세요" onClick={() => (setShow(true))} className="relative w-full bg-white lg:h-[3.5rem] h-[4rem] border border-gray-300 rounded-full shadow-sm p-3 pl-5 text-left cursor-default focus:outline-none focus:ring-1 h-12 focus:ring-sky-500 focus:border-indigo-500 sm:text-sm" value={keyword} onChange={(e) => (setKeyword(e.target.value))}/>
             <button onClick={() => (router.push(`/search?query=${keyword ? keyword : ""}`))} className="absolute lg:right-4 lg:top-4 right-5 top-5"><span><i className="fas fa-search"></i></span></button>
             {show ? (<>
