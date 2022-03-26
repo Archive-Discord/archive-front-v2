@@ -52,6 +52,7 @@ const SearchBox = () => {
 
     const keypressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
+            if(!keyword || keyword === "없음") return
             router.push(`/search?query=${keyword ? keyword : ""}`) 
         }
         if(e.key === "Escape") {

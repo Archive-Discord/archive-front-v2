@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import Paginator from "@components/Paginator";
+import SearchBox from "@components/SearchBox";
 
 export interface SearchResult {
   id: string;
@@ -60,6 +61,7 @@ const Search: NextPage<HomeProps> = ({
   return (
     <div className={styles.container}>
       <HeadInfo title={`${query} - 아카이브`} />
+      <SearchBox/>
       <div className="max-w-7xl mx-auto">
         <GoogleAds size="short" />
       </div>
