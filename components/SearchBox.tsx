@@ -61,7 +61,7 @@ const SearchBox = () => {
     }
   return (
     <>
-    <div className="min-h-[40vh] lg:max-w-[55vw] max-w-[90vw] flex flex-col justify-center mx-auto">
+    <div className="min-h-[40vh] lg:max-w-[55vw] max-w-[90vw] flex flex-col justify-center mx-auto" style={{zIndex: "999999"}}>
         <div className="flex flex-col items-center ">
             <span className="text-3xl"><span className="text-5xl font-bold">아카이브</span>, 안전한 디스코드 <TypeAnimation cursor={true} sequence={category} wrapper="span" repeat={Infinity}/>목록을...</span>
         </div>
