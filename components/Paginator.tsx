@@ -29,10 +29,10 @@ const Paginator: React.FC<PaginatorProps> = ({ currentPage, totalPage, pathname,
 	return (
 		<nav>
             <ul className="inline-flex">
-                <Link href={{ pathname, query: { query: search, page: currentPage - 1 } }}>
+                <Link href={{ pathname, query: { query: search, page: (Number(currentPage) <= 1 ? 1 : Number(currentPage) - 1 )} }}>
 					<a
 						className={`${
-							currentPage === 1 ? 'invisible' : ''
+							Number(currentPage) === 1 ? 'invisible' : ''
 						} h-10 px-5 transition-colors duration-150 rounded-l-lg focus:shadow-outline hover:bg-gray-100 mr-2 flex items-center justify-center`}
 					>
 						<svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"></path></svg>
@@ -50,7 +50,7 @@ const Paginator: React.FC<PaginatorProps> = ({ currentPage, totalPage, pathname,
 											? 'rounded-r-full'
 											: ''
 							} ${
-								currentPage === el
+								Number(currentPage) === el
 									? 'h-10 px-5 transition-colors duration-150 bg-gray-100 focus:shadow-outline'
 									: 'h-10 px-5 transition-colors duration-150 border border-r-0 focus:shadow-outline hover:bg-gray-100'
 							}`}
@@ -59,10 +59,10 @@ const Paginator: React.FC<PaginatorProps> = ({ currentPage, totalPage, pathname,
 						</a>
 					</Link>
 				))}
-				<Link href={{ pathname, query: { query: search, page: currentPage + 1 } }}>
+				<Link href={{ pathname, query: { query: search, page: Number(currentPage) + 1 } }}>
                 <a
 						className={`${
-							currentPage === totalPage ? 'invisible' : ''
+							Number(currentPage) === Number(totalPage) ? 'invisible' : ''
 						} h-10 px-5 transition-colors duration-150 rounded-r-lg focus:shadow-outline hover:bg-gray-100 ml-2 flex items-center justify-center`}
 					>
 						<svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" fillRule="evenodd"></path></svg>

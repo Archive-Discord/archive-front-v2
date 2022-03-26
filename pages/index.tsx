@@ -8,6 +8,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import SearchBox from '@components/SearchBox'
 
 interface HomeProps {
   server: {
@@ -34,6 +35,7 @@ const Home: NextPage<HomeProps> = ({server, bot}) => {
   return (
     <div className={styles.container}>
       <HeadInfo/>
+      <SearchBox/>
       <div className="max-w-7xl mx-auto">
         <GoogleAds size='short'/>
       </div>
