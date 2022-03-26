@@ -6,7 +6,7 @@ const Layout: React.FC = ({ children }) => {
     <>
       <div className='flex' style={{paddingTop: "3rem"}}>
         <Sidebar/>
-        <div className="w-full ml-8 md:ml-7 p-8 md:p-10s dark:bg-battlebot-black dark:text-white">
+        <div className="w-full md:ml-5 p-4 md:p-4 dark:text-white">
             {children}
         </div>
       </div>

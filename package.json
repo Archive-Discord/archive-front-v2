@@ -31,7 +31,9 @@
     "react-intersection-observer": "^8.33.1",
     "react-showdown": "^2.3.1",
     "react-toastify": "^8.2.0",
+    "react-type-animation": "^1.1.2",
     "react-use-clipboard": "^1.0.7",
+    "rooks": "^5.10.3",
     "sanitize-html": "^2.7.0",
     "tls": "^0.0.1"
   },
