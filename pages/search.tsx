@@ -10,6 +10,7 @@ import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import Paginator from "@components/Paginator";
 import SearchBox from "@components/SearchBox";
+type SearchResultType = "server" | "bot";
 
 export interface SearchResult {
   id: string;
@@ -19,7 +20,7 @@ export interface SearchResult {
   sortDescription: string;
   members?: number;
   servers?: number;
-  type: "server" | "bot";
+  type: SearchResultType;
   update: boolean;
   discriminator?: string;
   invite?: string;
@@ -66,13 +67,13 @@ const Search: NextPage<HomeProps> = ({
         <GoogleAds size="short" />
       </div>
       <div className={styles.title}>
-      <span className="text-4xl">"{query}" 서버 검색결과</span>
+      <span className="text-4xl">{"\"" + query + "\"" } 서버 검색결과</span>
       </div>
       <div className={styles.lists}>
         {servers.length === 0 ? (
           <>
             <span className="lg:text-2xl my-auto">
-              "{query}" 검색 결과가 없습니다.
+            {"\"" + query + "\"" } 검색 결과가 없습니다.
             </span>
           </>
         ) : (
@@ -92,12 +93,12 @@ const Search: NextPage<HomeProps> = ({
         <GoogleAds size="short" />
       </div>
       <div className={styles.title}>
-        <span className="text-4xl">"{query}" 봇 검색결과</span>
+        <span className="text-4xl">{"\"" + query + "\"" } 봇 검색결과</span>
       </div>
       <div className={styles.lists}>
         {bots.length === 0 ? (
           <span className="lg:text-2xl my-auto">
-            "{query}" 검색 결과가 없습니다.
+            {"\"" + query + "\"" } 검색 결과가 없습니다.
           </span>
         ) : (
           <>
