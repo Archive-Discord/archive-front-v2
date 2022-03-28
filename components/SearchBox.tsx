@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useOutsideClick } from "rooks";
-import TypeAnimation from 'react-type-animation';
+import ReactTextTransition, { presets } from 'react-text-transition';
 
 const category = [
-    "게임", 2000, "", 500, "개발", 2000, "", 500, "배틀그라운드", 2000, "", 500, "봇", 2000, "", 500, "그림"
+    "게임", "개발", "배틀그라운드", "봇",  "그림"
 ]
 
 interface SearchBoxResultProps {
@@ -27,6 +27,7 @@ const SearchBox = () => {
     const [searchBots, setSearchBots] = useState<SearchResult[]>();
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>()
+    const [textIndex, setTextIndex] = useState<number>(0);  
     const [show, setShow] = useState<boolean>(false);
     useOutsideClick(ref, outsideClickHandler);
     function outsideClickHandler () {
@@ -50,6 +51,12 @@ const SearchBox = () => {
             })
     }, [keyword])
 
+    useEffect(() => {
+        setInterval(() => {
+            setTextIndex((index) => (index + 1))
+        }, 3000)
+    }, [])
+
     const keypressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             if(!keyword || keyword === "없음") return
@@ -63,7 +70,7 @@ const SearchBox = () => {
     <>
     <div className="min-h-[40vh] lg:max-w-[55vw] max-w-[90vw] flex flex-col justify-center mx-auto">
         <div className="flex flex-col items-center ">
-            <span className="text-3xl"><span className="text-5xl font-bold">아카이브</span>, 안전한 디스코드 <TypeAnimation cursor={true} sequence={category} wrapper="span" repeat={Infinity}/>목록을...</span>
+            <span className="text-3xl flex flex-wrap items-end"><span className="text-5xl font-bold">아카이브,</span> 안전한 디스코드 <ReactTextTransition text={category[textIndex % category.length]} springConfig={presets.gentle} inline className="mx-1"/>목록을...</span>
         </div>
         <div className="relative mt-4 z-30" ref={ref}>
             <input onKeyPress={keypressHandler} placeholder="검색어를 입력해주세요" onClick={() => (setShow(true))} className="relative w-full bg-white lg:h-[3.5rem] h-[4rem] border border-gray-300 rounded-full shadow-sm p-3 pl-5 text-left cursor-default focus:outline-none focus:ring-1 h-12 focus:ring-sky-500 focus:border-indigo-500 sm:text-sm" value={keyword} onChange={(e) => (setKeyword(e.target.value))}/>
