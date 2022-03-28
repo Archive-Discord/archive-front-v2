@@ -140,9 +140,11 @@ const Home: NextPage<ServerProps> = ({server, error, statusCode, message}) => {
                     <span className='text-xl font-bold my-2'>카테고리</span>
                     <div className='flex flex-row flex-wrap'>
                         {server.categories.map((name, index) => (
-                            <div key={index} className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
-                                <span className='text-base p-1 px-2'>{name}</span>
-                            </div>
+                            <Link key={index} href={`/search?query=${name}`}>
+                                <a className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
+                                    <span className='text-base p-1 px-2'>{name}</span>
+                                </a>
+                            </Link>
                         ))}
                     </div>
                 </div>

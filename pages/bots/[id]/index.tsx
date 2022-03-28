@@ -178,9 +178,11 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, auth})
                     <span className='text-xl font-bold my-2'>카테고리</span>
                     <div className='flex flex-row flex-wrap'>
                         {bot.categories.map((name, index) => (
-                            <div key={index} className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
-                                <span className='text-base p-1 px-2'>{name}</span>
-                            </div>
+                            <Link key={index} href={`/search?query=${name}`}>
+                                <a className='border flex flex-row flex-wrap items-center rounded-xl my-1 hover:bg-stone-200 mx-1'>
+                                    <span className='text-base p-1 px-2'>{name}</span>
+                                </a>
+                            </Link>
                         ))}
                     </div>
                 </div>
@@ -188,7 +190,7 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, auth})
                     <span className='text-xl font-bold my-2'>관리자</span>
                     {bot.owners.map((owner, index) => (
                         <Link key={index} href={`/users/${owner.id}`}>
-                            <a className='flex flex-row items-center p-2 rounded-3xl my-1 hover:bg-stone-200'>
+                            <a target="_blank" className='flex flex-row items-center p-2 rounded-3xl my-1 hover:bg-stone-200'>
                                 <img className='w-10 rounded-full' src={userAvaterLink(owner)}/>
                                 <span className='text-lg ml-2'>{owner.username}<span className='text-gray text-sm'>#{owner.discriminator}</span></span>
                             </a>

@@ -6,7 +6,7 @@ import Paginator from '@components/Paginator'
 import ServerCard from '@components/ServerCard'
 import Toast from '@components/Toast'
 import { Bot, CategoryType, ServerList } from '@types'
-import { isValidURL, userAvaterLinkAsPending } from '@utils/Tools'
+import { isValidURL, userAvaterLink, userAvaterLinkAsPending } from '@utils/Tools'
 import axios, { AxiosError } from 'axios'
 import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -266,6 +266,27 @@ const Home: NextPage<editProps> = ({ bot, error, message, statusCode }) => {
                       <Markdown markdown={description}/>
                     </div>
                 </div>
+            </div>
+            <div className='border p-4 rounded-2xl w-full lg:w-[55vw] max-w-[95vw] mb-6'>
+                  <div className='flex flex-wrap w-full justify-between'>
+                    <div className='flex flex-col'>
+                      <span className='text-2xl text-sky-500'>관리자 (추가예정)</span>
+                      <span className='text-sm'>관리자를 추가하거나 삭제합니다</span>
+                    </div>
+                    <div>
+                      <button className='w-full flex p-3 h-10 rounded-2xl cursor-default focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 items-center border'><i className="fas fa-plus"/></button>
+                    </div>
+                  </div>
+                  <div>
+                    {bot.owners.map((owner, index) => (
+                          <Link key={index} href={`/users/${owner.id}`}>
+                              <a target="_blank" className='flex flex-row items-center p-2 rounded-2xl my-1 hover:bg-gray-100 border'>
+                                  <img className='w-10 rounded-full' src={userAvaterLink(owner)}/>
+                                  <span className='text-lg ml-2'>{owner.username}<span className='text-gray text-sm'>#{owner.discriminator}</span></span>
+                              </a>
+                          </Link>
+                      ))}
+                  </div>
             </div>
             <button onClick={() => (UpdateBot())} className='focus:outline-none hover:ring-sky-500 hover:border-sky-500 hover:ring-1 hover:ring-sky-500 border rounded-2xl w-full lg:w-[55vw] max-w-[95vw] h-16 text-2xl font-bold mb-8'>저장하기</button>
             </div>
