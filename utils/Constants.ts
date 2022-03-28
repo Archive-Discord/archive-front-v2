@@ -13,7 +13,7 @@ export let NavBarList = [
     },
     {
         "name": "디스코드",
-        "href": "/support"
+        "href": "/servers/786153760824492062"
     },
     {
         "name": "개발자",
