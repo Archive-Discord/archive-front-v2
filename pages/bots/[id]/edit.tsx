@@ -80,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
     };
   };
 const Home: NextPage<editProps> = ({ bot, error, message, statusCode }) => {
+  if(error) return <ErrorPage statusCode={statusCode} message={message} />
   const [description, setDescription] = useState(bot.description)
   const [website, setWebsite] = useState(bot.website)
   const [supprot, setSupprot] = useState(bot.support)
@@ -158,8 +159,6 @@ const Home: NextPage<editProps> = ({ bot, error, message, statusCode }) => {
         Toast(e.response.data.message, 'error')
       })
   }
-  
-  if(error) return <ErrorPage statusCode={statusCode} message={message} />
   return (
     <div className={styles.container} style={{marginTop: "4rem"}}>
       <HeadInfo title={`${bot.name} 봇 관리 - 아카이브`}/>

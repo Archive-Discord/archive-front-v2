@@ -84,6 +84,7 @@ const ReportBot: NextPage<BotProps> = ({ bot, error, statusCode, message }) => {
   const [login, setLogin] = useState<boolean>(true);
   const [reportType, setReportType] = useState<reportTypesObj>();
   const [reportReason, setReportReason] = useState<string>();
+  const router = useRouter();
   const captchaRef = useRef(null);
   useEffect(() => {
     axios
@@ -98,6 +99,25 @@ const ReportBot: NextPage<BotProps> = ({ bot, error, statusCode, message }) => {
 
   const reportTypeSeleceted = (type: reportTypesObj) => {
     setReportType(type);
+  }
+
+  const reportHandler = async () => {
+    if(!reportType) return Toast('신고 방식을 선택해주세요', 'error')
+    if(!reportReason) return Toast('신고 사유를 입력해주세요', 'error')
+    axios.post(`/bots/${bot.id}/report`, {
+      report_type: reportType.value,
+      reason: reportReason
+    })
+    .then(data => {
+      Toast(data.data.message, 'success')
+      Toast('잠시후 봇 페이지로 이동합니다', 'success')
+      setTimeout(() => {
+          router.push(`/bots/${bot.id}`)
+        }, 2000)
+    })
+    .catch((e: AxiosError) => {
+      Toast(e.response.data.message, 'error')
+    })
   }
 
   if (error) return <ErrorPage statusCode={statusCode} message={message} />;
@@ -136,7 +156,7 @@ const ReportBot: NextPage<BotProps> = ({ bot, error, statusCode, message }) => {
                         reportType.value === "discord_tos" ? (
                         <>
                             <div className="bg-red-100 rounded-2xl py-5 px-6 mb-3 text-base text-red-700 inline-flex items-center w-full" role="alert">
-                                <span>디스코드 ToS 위반으로 신고하시는 거 같아요! <a className="text-sky-500 font-bold" href="https://support.discord.com/hc/ko/requests/new" target={"_blank"}> 디스코드 신고</a>에도 직접 신고하여 주세요! </span>
+                                <span>디스코드 ToS 위반으로 신고하시는 거 같아요! <a className="text-sky-500 font-bold" rel="noreferrer" href="https://support.discord.com/hc/ko/requests/new" target={"_blank"}> 디스코드 신고</a>에도 직접 신고하여 주세요! </span>
                             </div>
                         </>) :(null)
                         
@@ -145,7 +165,7 @@ const ReportBot: NextPage<BotProps> = ({ bot, error, statusCode, message }) => {
                         reportType.value === "personal_information" ? (
                         <>
                             <div className="bg-red-100 rounded-2xl py-5 px-6 mb-3 text-base text-red-700 inline-flex items-center w-full" role="alert">
-                                <span>개인정보침해로 신고하시는 거 같아요! 필요에 따라<a className="text-sky-500 font-bold" href="https://privacy.kisa.or.kr/main.do" target={"_blank"}> 개인정보침해신고센터</a>에도 신고하여 주세요! </span>
+                                <span>개인정보침해로 신고하시는 거 같아요! 필요에 따라<a className="text-sky-500 font-bold" rel="noreferrer" href="https://privacy.kisa.or.kr/main.do" target={"_blank"}> 개인정보침해신고센터</a>에도 신고하여 주세요! </span>
                             </div>
                         </>) :(null)
                         
@@ -159,9 +179,10 @@ const ReportBot: NextPage<BotProps> = ({ bot, error, statusCode, message }) => {
                     </div>
                     <textarea onChange={(e) => (setReportReason(e.target.value))} value={reportReason} placeholder='사유' className='mt-2 w-full p-4 h-[40vh] border rounded-2xl cursor-default focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500'/>
                 </div>
-                </>) :(null)}
+                <button onClick={() => (reportHandler())} className='focus:outline-none hover:ring-sky-500 hover:border-sky-500 hover:ring-1 hover:ring-sky-500 border rounded-2xl w-full h-16 text-2xl mb-8 mt-10'>신고하기</button>
+                </>) :(null)
+              }
             </div>
-            <button className='focus:outline-none hover:ring-sky-500 hover:border-sky-500 hover:ring-1 hover:ring-sky-500 border rounded-2xl w-full h-16 text-2xl mb-8 mt-10'>신고하기</button>
         </div>
         <div className="w-full max-w-7xl my-2 mx-auto">
             <GoogleAds size='short'/>
