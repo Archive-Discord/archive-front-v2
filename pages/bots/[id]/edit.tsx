@@ -80,14 +80,14 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
     };
   };
 const Home: NextPage<editProps> = ({ bot, error, message, statusCode }) => {
-  const [description, setDescription] = useState(bot.description)
-  const [website, setWebsite] = useState(bot.website)
-  const [supprot, setSupprot] = useState(bot.support)
-  const [invite, setInvite] = useState(bot.invite)
-  const [prefix, setPrefix] = useState(bot.prefix)
-  const [sortDescription, setSortDescription] = useState(bot.sortDescription)
-  const [token, setToken] = useState(bot.token)
-  const [category, setCategory] = useState<string[]>(bot.categories)
+  const [description, setDescription] = useState(bot?.description)
+  const [website, setWebsite] = useState(bot?.website)
+  const [supprot, setSupprot] = useState(bot?.support)
+  const [invite, setInvite] = useState(bot?.invite)
+  const [prefix, setPrefix] = useState(bot?.prefix)
+  const [sortDescription, setSortDescription] = useState(bot?.sortDescription)
+  const [token, setToken] = useState(bot?.token)
+  const [category, setCategory] = useState<string[]>(bot?.categories)
   const [tokenCopy, setTokenCopy] = useCopyClipboard(token, {
     successDuration: 2000
   })
@@ -158,7 +158,6 @@ const Home: NextPage<editProps> = ({ bot, error, message, statusCode }) => {
         Toast(e.response.data.message, 'error')
       })
   }
-  
   if(error) return <ErrorPage statusCode={statusCode} message={message} />
   return (
     <div className={styles.container} style={{marginTop: "4rem"}}>

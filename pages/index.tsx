@@ -1,14 +1,14 @@
 import GoogleAds from '@components/GoogleAds'
 import HeadInfo from '@components/HeadInfo'
-import ServerCard from '@components/ServerCard'
-import BotCard from '@components/BotCard'
 import { Bot, ServerList } from '@types'
 import type { GetServerSideProps, GetStaticProps, NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 import SearchBox from '@components/SearchBox'
+import dynamic from 'next/dynamic'
+
+const BotCard = dynamic(() => import('@components/BotCard'), { ssr: true })
+const ServerCard = dynamic(() => import('@components/ServerCard'), { ssr: true })
 
 interface HomeProps {
   server: {
