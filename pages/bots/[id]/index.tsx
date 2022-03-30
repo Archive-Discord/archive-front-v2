@@ -188,7 +188,7 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, auth})
                 </div>
                 <div className='flex flex-col'>
                     <span className='text-xl font-bold my-2'>관리자</span>
-                    {bot.owners.map((owner, index) => (
+                    {bot.owners.filter(function(x) { if(!x) return false; return true; }).map((owner, index) => (
                         <Link key={index} href={`/users/${owner.id}`}>
                             <a target="_blank" className='flex flex-row items-center p-2 rounded-3xl my-1 hover:bg-stone-200'>
                                 <img className='w-10 rounded-full' src={userAvaterLink(owner)}/>
