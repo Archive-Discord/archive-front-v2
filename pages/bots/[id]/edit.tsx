@@ -277,7 +277,7 @@ const Home: NextPage<editProps> = ({ bot, error, message, statusCode }) => {
                     </div>
                   </div>
                   <div>
-                    {bot.owners.map((owner, index) => (
+                    {bot.owners.filter(function(x) { if(!x) return false; return true; }).map((owner, index) => (
                           <Link key={index} href={`/users/${owner.id}`}>
                               <a target="_blank" className='flex flex-row items-center p-2 rounded-2xl my-1 hover:bg-gray-100 border'>
                                   <img className='w-10 rounded-full' src={userAvaterLink(owner)}/>
