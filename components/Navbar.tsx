@@ -79,7 +79,7 @@ const NavBar: NextPage = () => {
           {user ? (
                 <>
                   <div className='mt-4 lg:mt-0 lg:ml-0 lb:mb-0 flex text text-gray-700 items-center font-semibold ml-2 mb-2 lg:mb-0'>
-                    <img className='w-8 h-8 rounded-full mr-1.5' src={userAvaterLink(user)}/>{user.username}<Dropdown/>
+                    <img className='w-8 h-8 rounded-full mr-1.5' src={userAvaterLink(user)}/>{user.username}<Dropdown user={user}/>
                   </div>
                 </>
               ):(
