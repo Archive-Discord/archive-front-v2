@@ -7,9 +7,9 @@ import styles from '../../styles/Server.module.css'
 import SearchBox from '@components/SearchBox'
 import dynamic from 'next/dynamic'
 import ErrorPage from '@components/ErrorPage'
-import { userAvaterLink } from '@utils/Tools'
+import { checkUserFlag, userAvaterLink } from '@utils/Tools'
 import DateFormet from '@utils/Date'
-import { isBuffer } from 'util'
+import ToolTip from "@components/Tooltip"
 
 const BotCard = dynamic(() => import('@components/BotCard'), { ssr: true })
 const ServerCard = dynamic(() => import('@components/ServerCard'), { ssr: true })
@@ -79,11 +79,20 @@ const UserPage: NextPage<UserPageProps> = ({user, error, message, statusCode}) =
                       <span className='lg:ml-6 text-xl font-bold truncate lg:mt-0 mt-2 text-red-400'><i className="fas fa-exclamation-triangle mr-2"/>정보 갱신불가</span>
                   </>)}
                   <span className='lg:ml-6 text-3xl font-bold truncate lg:mt-0 mt-1'>{user.username}<span className='text-gray text-lg'>#{user.discriminator}</span></span>
-                  <span className='flex flex-row lg:ml-6 text-lg font-semibold lg:mt-2 mx-auto'>
-                      <span className='mx-2'><i className="fas fa-calendar-alt mr-1"/>{DateFormet(user.published_date).fromNow(true)}전 가입</span>
-                  </span>
+                  <div className='lg:ml-6 lg:mt-0 mt-1 flex flex-row space-x-2'>
+                    {checkUserFlag(user.archive_flags, 'bughunter') && (<ToolTip name="bughunter" description='아카이브 Bug Hunter'><i className="fas fa-bug text-2xl text-green-500"/></ToolTip>)}
+                    {checkUserFlag(user.archive_flags, 'manager') && (<ToolTip name="manager" description='아카이브 스태프'><i className="fas fa-shield-alt text-2xl text-yellow-500"/></ToolTip>)}
+                    {checkUserFlag(user.archive_flags, 'reviewer') && (<ToolTip name="reviewer" description='아카이브 봇, 서버 리뷰어'><i className="fas fa-lightbulb text-2xl text-sky-500"/></ToolTip>)}
+                  </div>
               </div>
           </div>
+        {
+         //<div>
+         //   <span className='flex flex-row lg:ml-6 text-lg font-semibold lg:mt-2 mx-auto'>
+         //     <span className='mx-2'><i className="fas fa-calendar-alt mr-1"/>{DateFormet(user.published_date).fromNow(true)}전 가입</span>
+         //   </span>
+         // </div>
+        }
         </div>
           <div className="max-w-7xl mx-auto">
               <GoogleAds size='short'/>
