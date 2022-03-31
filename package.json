@@ -23,7 +23,7 @@
     "net": "^1.0.2",
     "next": "12.0.7",
     "next-connect": "^0.11.0",
-    "node-fetch": "^3.1.0",
+    "node-fetch": "^3.1.1",
     "oauth-discord": "^1.5.2",
     "react": "^17.0.2",
     "react-adsense": "^0.1.0",
