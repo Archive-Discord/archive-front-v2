@@ -5,10 +5,10 @@ on:
     branches: [stable]
 
 env:
-  DOCKER_IMAGE: ghcr.io/Archive-Discord/archive-front-v2
+  DOCKER_IMAGE: ghcr.io/archive-discord/archive-front-v2
   VERSION: ${{ github.sha }}
   NAME: archive_front
-  GITHUB_USER: Archive-Discord
+  GITHUB_USER: archive-discord
 
 jobs:
   # 빌드 Job
