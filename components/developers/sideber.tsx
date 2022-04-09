@@ -8,7 +8,7 @@ function classNames(...classes) {
 const SideBar: NextPage = () => {
   return (
     <>
-      <div className="min-h-[93vh] flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-white dark:bg-battlebot-dark text-black transition-all duration-300 border border-solid border-y-0 sidebar text-black dark:border-none">
+      <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-white dark:bg-battlebot-dark h-full text-black transition-all duration-300 border border-solid border-y-0 sidebar text-black dark:border-none">
         <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow h-full">
           <ul className="flex flex-col py-4 space-y-1 h-full">
             <li className="px-5 hidden md:block">
