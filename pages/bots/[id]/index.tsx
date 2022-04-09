@@ -25,7 +25,6 @@ interface botProps {
     auth?: string
 }
 export const getServerSideProps: GetServerSideProps = async(context) => {
-  
   let bot = (await fetch(`${process.env.API_DOMAIN}/bots/${encodeURI(context.params.id as string)}`)
   .then(res => res.json())) as any;
   if(bot.status !== 200) {
@@ -36,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
             message: bot.message,
             statusCode: bot.status,
             id: context.params.id,
-            auth: context.req.cookies['Authorization']
+            auth: context.req.cookies['Authorization'] ? context.req.cookies['Authorization'] : null
         },
     };
   }
@@ -47,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async(context) => {
       message: bot.message,
       statusCode: bot.status,
       id: context.params.id,
-      auth: context.req.cookies['Authorization']
+      auth: context.req.cookies['Authorization'] ? context.req.cookies['Authorization'] : null
     },
   };
 };

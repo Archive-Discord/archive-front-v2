@@ -30,7 +30,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <NavBar/>
         <Component {...pageProps} />
         <ToastContainer/>
-      <Footer/>
+      {!router.asPath.startsWith('/developers') && <Footer/>}
     </>
   )
 }
