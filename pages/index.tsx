@@ -48,7 +48,7 @@ const Home: NextPage<HomeProps> = ({server, bot}) => {
           .slice(0, 8)
           .sort((a,b) => b.like - a.like)
           .map((item, index) => (<>
-            <ServerCard guild={item} key={index}/>
+            <ServerCard guild={item} key={item.id}/>
         </>))}
       </div>
       <Link href={'/servers'}>
@@ -66,7 +66,7 @@ const Home: NextPage<HomeProps> = ({server, bot}) => {
           .slice(0, 8)
           .sort((a,b) => b.like - a.like)
           .map((item, index) => (<>
-            <BotCard bot={item} key={index}/>
+            <BotCard bot={item} key={item.id}/>
         </>))}
       </div>
       <Link href={'/bots'}>
