@@ -5,6 +5,7 @@ export default function HeadInfo({title, description, keyword, image }: HeadInfo
         <>
             <Head>
                 <title>{title}</title>
+                <link rel="canonical" href="http://archiver.me/"/>
                 <link rel='search' type='application/opensearchdescription+xml' title={title} href='/opensearch.xml' />
                 <link rel="icon" href="https://archiver.me/favicon.ico" />
                 <meta name="description" content={description} />
