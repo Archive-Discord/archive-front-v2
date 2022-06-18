@@ -5,14 +5,22 @@ export default function HeadInfo({title, description, keyword, image }: HeadInfo
         <>
             <Head>
                 <title>{title}</title>
+                <link rel='search' type='application/opensearchdescription+xml' title={title} href='/opensearch.xml' />
                 <link rel="icon" href="https://archiver.me/favicon.ico" />
                 <meta name="description" content={description} />
                 <meta name="keyword" content={keyword} />
+                {/* Open Graph */}
                 <meta property="og:site_name" content="아카이브"/>
                 <meta property="og:image" content={image} /> 
                 <meta property="og:title" content={title} /> 
                 <meta property="og:description" content={description} />
                 <meta property="og:title" content={title}/>
+                {/* Twitter */}
+                <meta name='twitter:card' content={image} />
+                <meta name='twitter:site' content='https://archiver.me' />
+                <meta name='twitter:title' content={title} />
+                <meta name='twitter:description' content={description} />
+                <meta name='twitter:image' content={image} />
             </Head>
         </>
     )
