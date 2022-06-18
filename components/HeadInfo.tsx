@@ -15,7 +15,6 @@ export default function HeadInfo({title, description, keyword, image }: HeadInfo
                 <meta property="og:image" content={image} /> 
                 <meta property="og:title" content={title} /> 
                 <meta property="og:description" content={description} />
-                <meta property="og:title" content={title}/>
                 {/* Twitter */}
                 <meta name='twitter:card' content={image} />
                 <meta name='twitter:site' content='https://archiver.me' />
