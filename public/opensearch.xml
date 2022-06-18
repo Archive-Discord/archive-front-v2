@@ -1,0 +1,8 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>아카이브</ShortName>
+    <Description>안전한 디스코드 목록을</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Image width="16" height="16" type="image/x-icon">https://archiver.me/logo.png</Image>
+    <Url type="text/html" method="get" template="https://archiver.me/search?query={searchTerms}"/>
+    <moz:SearchForm>https://archiver.me/search</moz:SearchForm>
+</OpenSearchDescription>
