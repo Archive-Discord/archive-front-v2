@@ -129,7 +129,7 @@ const SearchBoxResult: NextPage<SearchBoxResultProps> = ({bots, servers, error, 
     )
 }
 
-const ServerCardResult: NextPage<ServerCardResultProps> = ({server}) => {
+const ServerCardResult: React.FC<ServerCardResultProps> = ({server}) => {
     return (<>
         <Link href={`/servers/${server.id}`}>
             <a className="w-full flex items-center border p-1 rounded-md hover:bg-gray-100 my-1">
@@ -143,7 +143,7 @@ const ServerCardResult: NextPage<ServerCardResultProps> = ({server}) => {
     </>)
 }
 
-const BotCardResult: NextPage<BotCardResultProps> = ({bot}) => {
+const BotCardResult: React.FC<BotCardResultProps> = ({bot}) => {
     return (<>
         <Link href={`/bots/${bot.id}`}>
             <a className="w-full flex items-center border p-1 rounded-md hover:bg-gray-100 my-1">
