@@ -27,6 +27,9 @@ export let EndPoints = {
     },
     Archive: {
         API: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://api.archiver.me"
+    },
+    Github: {
+        API: "https://api.github.com"
     }
 }
 

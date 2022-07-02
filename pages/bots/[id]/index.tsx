@@ -96,7 +96,7 @@ const PendingBot: NextPage<botProps> = ({
   return (
     <div className={styles.container}>
       <HeadInfo
-        title={bot.name + " - 아카이브"}
+        title={bot.name}
         description={bot.sortDescription}
         image={userAvaterLinkAsPending(bot)}
       />

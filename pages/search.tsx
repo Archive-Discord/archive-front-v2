@@ -61,7 +61,7 @@ const Search: NextPage<HomeProps> = ({
 }) => {
   return (
     <div className={styles.container}>
-      <HeadInfo title={`${query} - 아카이브`} />
+      <HeadInfo title={`${query}`} />
       <SearchBox/>
       <div className="max-w-7xl mx-auto">
         <GoogleAds size="short" />

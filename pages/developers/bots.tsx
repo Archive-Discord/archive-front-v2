@@ -99,7 +99,7 @@ fetch(\`https://api.archiver.me/bots/928523914890608671/like/406815674539835402\
 const Home: NextPage = () => {
   return (
       <>
-      <HeadInfo title='봇 개발자 - 아카이브'/>
+      <HeadInfo title='봇 개발자'/>
       <Layout>
           <Markdown markdown={StartPge}/>
       </Layout>

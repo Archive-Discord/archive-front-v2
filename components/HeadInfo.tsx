@@ -4,7 +4,7 @@ export default function HeadInfo({title, description, keyword, image }: HeadInfo
     return (
         <>
             <Head>
-                <title>{title}</title>
+                <title>{title  + " - 아카이브"}</title>
                 <link rel="canonical" href="http://archiver.me/"/>
                 <link rel='search' type='application/opensearchdescription+xml' title={title} href='/opensearch.xml' />
                 <link rel="icon" href="https://archiver.me/favicon.ico" />
@@ -13,12 +13,12 @@ export default function HeadInfo({title, description, keyword, image }: HeadInfo
                 {/* Open Graph */}
                 <meta property="og:site_name" content="아카이브"/>
                 <meta property="og:image" content={image} /> 
-                <meta property="og:title" content={title} /> 
+                <meta property="og:title" content={title  + " - 아카이브"} /> 
                 <meta property="og:description" content={description} />
                 {/* Twitter */}
                 <meta name='twitter:card' content={image} />
                 <meta name='twitter:site' content='https://archiver.me' />
-                <meta name='twitter:title' content={title} />
+                <meta name='twitter:title' content={title + " - 아카이브"} />
                 <meta name='twitter:description' content={description} />
                 <meta name='twitter:image' content={image} />
             </Head>

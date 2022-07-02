@@ -69,7 +69,7 @@ const UserPage: NextPage<UserPageProps> = ({user, error, message, statusCode}) =
   if(error) return <ErrorPage message={message} statusCode={statusCode}/>
   return (
       <>
-        <HeadInfo title={user.username + " 프로필 - 아카이브"} image={userAvaterLink(user)} description={userDescription(user)}/>
+        <HeadInfo title={user.username + " 프로필"} image={userAvaterLink(user)} description={userDescription(user)}/>
         <div className={styles.container}>
         <div className='flex lg:flex-row lg:justify-between lg:flex-nowarp flex-col items-center justify-center flex-warp mx-4'>
           <div className='flex lg:flex-row flex-col items-center'>

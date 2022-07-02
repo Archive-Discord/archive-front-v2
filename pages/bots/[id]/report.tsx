@@ -125,7 +125,7 @@ const ReportBot: NextPage<BotProps> = ({ bot, error, statusCode, message }) => {
   return (
     <div className={styles.container}>
       <HeadInfo
-        title={bot.name + " 신고 - 아카이브"}
+        title={bot.name + " 신고"}
         description={bot.sortDescription}
         image={userAvaterLinkAsPending(bot)}
       />

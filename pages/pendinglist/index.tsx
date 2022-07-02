@@ -41,7 +41,7 @@ const Home: NextPage<submitProps> = ({ list, error, message, statusCode }) => {
   if(error) return <ErrorPage statusCode={statusCode} message={message} />
   return (
     <>
-      <HeadInfo title="심사목록 - 아카이브" />
+      <HeadInfo title="심사목록" />
       <div className={styles.container + " flex items-center flex-col"} style={{marginTop: "9rem"}}>
         <span className="text-3xl">심사 대기중인 목록</span>
         <div className='flex flex-row flex-wrap items-center justify-center mt-5 min-h-[90vh]'>
