@@ -4,7 +4,6 @@ RUN mkdir -p /app
 WORKDIR /app
 ADD . /app/
 
-RUN rm yarn.lock || true
 RUN rm package-lock.json || true
 RUN yarn
 RUN yarn build
