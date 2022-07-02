@@ -86,7 +86,7 @@ const SearchBox = () => {
   )
 }
 
-const SearchBoxResult: NextPage<SearchBoxResultProps> = ({bots, servers, error, loading}) => {
+const SearchBoxResult: React.FC<SearchBoxResultProps> = ({bots, servers, error, loading}) => {
     return (
         <>
             <div className="absolute w-full mt-1 border p-2 rounded-md min-h-[30vh] flex flex-wrap overflow-y-auto bg-white max-h-[30vh]">
