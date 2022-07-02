@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<
 const Home: NextPage<HomeProps> = ({ server, page }) => {
   return (
     <>
-      <HeadInfo title="서버목록 - 아카이브" />
+      <HeadInfo title="서버목록" />
       <div className={styles.container} style={{ marginTop: "6rem" }}>
       <div className="max-w-7xl mx-auto my-14">
         <GoogleAds size='short'/>
