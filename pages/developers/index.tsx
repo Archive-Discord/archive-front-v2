@@ -27,7 +27,7 @@ const StartPge = `
 const Home: NextPage = () => {
   return (
       <>
-      <HeadInfo title='개발자 - 아카이브'/>
+      <HeadInfo title='개발자'/>
       <Layout>
           <Markdown markdown={StartPge}/>
       </Layout>

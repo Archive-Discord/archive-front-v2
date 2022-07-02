@@ -125,7 +125,7 @@ const ReportBot: NextPage<ServerProps> = ({ server, error, statusCode, message }
   return (
     <div className={styles.container}>
       <HeadInfo
-        title={server.name + " 신고 - 아카이브"}
+        title={server.name + " 신고"}
         description={server.sortDescription}
         image={userAvaterLinkAsPending(server)}
       />

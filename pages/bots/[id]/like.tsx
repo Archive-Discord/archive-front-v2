@@ -88,7 +88,7 @@ const InviteServer: NextPage<BotProps> = ({ bot, error, statusCode, message }) =
   return (
     <div className={styles.container}>
       <HeadInfo
-        title={bot.name + " 좋아요 - 아카이브"}
+        title={bot.name + " 좋아요"}
         description={bot.sortDescription}
         image={userAvaterLinkAsPending(bot)}
       />

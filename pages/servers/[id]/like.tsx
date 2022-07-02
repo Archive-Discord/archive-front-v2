@@ -90,7 +90,7 @@ const InviteServer: NextPage<ServerProps> = ({ server, error, statusCode, messag
   return (
     <div className={styles.container}>
       <HeadInfo
-        title={server.name + " 좋아요 - 아카이브"}
+        title={server.name + " 좋아요"}
         description={server.sortDescription}
         image={guildProfileLink(server)}
       />

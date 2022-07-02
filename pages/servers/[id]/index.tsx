@@ -55,7 +55,7 @@ const Home: NextPage<ServerProps> = ({
   return (
     <div className={styles.container}>
       <HeadInfo
-        title={server.name + " - 아카이브"}
+        title={server.name}
         description={server.sortDescription}
         image={guildProfileLink(server)}
       />

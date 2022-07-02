@@ -161,7 +161,7 @@ const Home: NextPage<editProps> = ({ bot, error, message, statusCode }) => {
   if(error) return <ErrorPage statusCode={statusCode} message={message} />
   return (
     <div className={styles.container} style={{marginTop: "4rem"}}>
-      <HeadInfo title={`${bot.name} 봇 관리 - 아카이브`}/>
+      <HeadInfo title={`${bot.name} 봇 관리`}/>
       <div className="flex flex-col justify-center items-center flex-wrap min-h-[50vh]">
           <span className='my-10 text-3xl'>봇 관리하기</span>
             <div className='flex flex-row flex-wrap items-center justify-center w-full border p-4 rounded-2xl lg:w-[55vw] max-w-[95vw] mb-10'>

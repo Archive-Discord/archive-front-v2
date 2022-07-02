@@ -140,7 +140,7 @@ const Addbot: NextPage = () => {
   if(!login) return <Login/>
   return (
     <div className={styles.container} style={{marginTop: "5rem"}}>
-      <HeadInfo title='봇 추가 - 아카이브'/>
+      <HeadInfo title='봇 추가'/>
       <div className="flex flex-col justify-center items-center flex-wrap min-h-[50vh]">
           <span className='my-10 text-3xl'>봇 추가하기</span>
           {bot ? (<>

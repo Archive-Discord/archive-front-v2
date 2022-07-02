@@ -98,7 +98,7 @@ const PendingBot: NextPage<botProps> = ({bot, error, statusCode, message, id}) =
   if(error) return <ErrorPage statusCode={statusCode} message={message}/>
   return (
     <div className={styles.container}>
-      <HeadInfo title={bot.name + " 심사 - 아카이브"} description={bot.sortDescription} image={userAvaterLinkAsPending(bot)}/>
+      <HeadInfo title={bot.name + " 심사"} description={bot.sortDescription} image={userAvaterLinkAsPending(bot)}/>
       <div className='flex lg:flex-row lg:justify-between lg:flex-nowarp flex-col items-center justify-center flex-warp mx-4'>
         <div className='flex lg:flex-row flex-col items-center'>
             <img className='lg:w-40 w-36 rounded-3xl' src={userAvaterLinkAsPending(bot)}/>

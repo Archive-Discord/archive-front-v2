@@ -128,7 +128,7 @@ const Home: NextPage = () => {
   if(!login) return <Login/>
   return (
     <div className={styles.container} style={{marginTop: "5rem"}}>
-      <HeadInfo title='서버추가 - 아카이브'/>
+      <HeadInfo title='서버추가'/>
       <div className="flex flex-col justify-center items-center flex-wrap min-h-[50vh]">
           <span className='my-10 text-3xl'>서버 추가하기</span>
           {server ? (<>
