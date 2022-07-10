@@ -36,7 +36,7 @@ const NavBar: NextPage = () => {
 
   return (
     <>
-      <nav className="fixed top-0 z-40 flex flex-wrap items-center px-5 py-2 backdrop-blur text-gray-100 border-b border-gray-900/10 w-full">
+      <nav id='navbar' className="fixed top-0 z-40 flex flex-wrap items-center px-5 py-2 backdrop-blur text-gray-100 border-b border-gray-900/10 w-full">
         <div className='container flex flex-wrap justify-between mx-auto px-4 items-center'>
           <div className="flex items-center flex-shrink-0 text-white mr-6">
           <Link href='/'>
