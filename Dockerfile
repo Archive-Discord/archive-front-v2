@@ -9,6 +9,6 @@ RUN yarn
 RUN yarn build
 
 ENV HOST 0.0.0.0
-EXPOSE 3000
+EXPOSE 4000
 
 CMD [ "yarn", "start"]
