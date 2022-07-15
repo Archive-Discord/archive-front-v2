@@ -44,7 +44,7 @@ jobs:
   deploy:
     needs: build
     name: Deploy
-    runs-on: [ self-hosted, label-archive ]
+    runs-on: [ self-hosted, battlebot-hosting ]
     steps:
       - name: Login to ghcr
         uses: docker/login-action@v1
