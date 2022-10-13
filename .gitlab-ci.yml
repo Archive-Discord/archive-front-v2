@@ -26,7 +26,7 @@ build:
     - docker build -t $DOKCER_IMAGE_URL .
     - docker push $DOKCER_IMAGE_URL
   only:
-    - main
+    - stable
 
 deploy:
   image: docker:latest
