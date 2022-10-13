@@ -25,7 +25,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.11.0",
     "next-pwa": "^5.5.4",
-    "node-fetch": "^3.1.1",
+    "node-fetch": "^3.2.10",
     "oauth-discord": "^1.5.2",
     "react": "^17.0.2",
     "react-adsense": "^0.1.0",
