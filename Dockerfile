@@ -1,14 +1,15 @@
+# Common build stage
 FROM node:16.14.2
 
-RUN mkdir -p /app
-WORKDIR /app
-ADD . /app/
+COPY . ./app
 
-RUN rm package-lock.json || true
+WORKDIR /app
+
+COPY .env .env.production.local
 RUN yarn
+ENV NODE_ENV production
 RUN yarn build
 
-ENV HOST 0.0.0.0
 EXPOSE 3000
 
-CMD [ "yarn", "start"]
+CMD ["yarn", "start"]
