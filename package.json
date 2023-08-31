@@ -18,7 +18,7 @@
     "express-rate-limit": "^6.0.4",
     "fs": "^0.0.1-security",
     "lru-cache": "^6.0.0",
-    "mongoose": "^6.1.5",
+    "mongoose": "^6.12.0",
     "mongoose-long": "^0.5.1",
     "net": "^1.0.2",
     "next": "12.1.0",
